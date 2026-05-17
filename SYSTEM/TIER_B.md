@@ -29,7 +29,6 @@ On switch: fetch the new project's four routing files. Flag previous project as 
 - `000` → re-fetch TIER_A + TIER_B
 - `001` → re-fetch active project's four routing files
 - `002` → full refresh (TIER_A + TIER_B + all active routing), bypass cache
-- `recall: {topic}` → (Tier 2 only) query Graphiti regardless of domain gate
 
 ## On missing files
 
