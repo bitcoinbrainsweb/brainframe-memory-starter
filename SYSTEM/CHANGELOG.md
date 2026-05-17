@@ -16,7 +16,7 @@ Initial release. Tier 0 (files-only) feature-complete.
 
 ### Not in this release (on roadmap)
 - Tier 1 upgrade path (Supabase event log, health reports, drift detection)
-- Tier 2 upgrade path (self-hosted Graphiti for Wire 1/2)
+- Tier 2 upgrade path (self-hosted vector memory layer)
 - Automated template-sync PRs from upstream master repo
 - Additional language support beyond English
 
