@@ -1,4 +1,4 @@
-# Memory System v1.0.0
+# Memory System v1.1.0
 
 Surface: [OWNER set this to: claude-code OR claude-project]
 
@@ -10,9 +10,9 @@ This system gives Claude durable memory across sessions using GitHub as canonica
 
 Four tiers:
 - T1: This file + Project instructions (always present)
-- T2: Fetched each session — GLOBAL_RULES, routing files, people.md
-- T3: Fetched on demand — topic notes, decisions, specs
-- T4: Supabase — queryable decisions, specs, people, contributions
+- T2: Fetched each session -- GLOBAL_RULES, routing files, people.md
+- T3: Fetched on demand -- topic notes, decisions, specs, voice files, advisor files
+- T4: Supabase -- queryable decisions, specs, people, contributions
 
 ## How
 
@@ -35,8 +35,11 @@ Skills live in `.claude/skills/`. Each has a `SKILL.md` with frontmatter.
 
 **Intelligence:** `ai-pulse`
 
+**Voice cloning:** Built into `human-writing`. Say "write as [name]" or "in [name]'s voice". Add authors to `USER/voice/authors/`. See `USER/voice/README.md`.
+
+**Advisors:** `advisor`. Say "ask [name]" or "run this through [name]". Add advisors to `advisors/[category]/`. See `advisors/README.md`.
+
 ## Version
 
-Memory System v1.0.0 — canonical source: https://github.com/YOUR_GITHUB_USER/YOUR_REPO/blob/main/CLAUDE.md
+Memory System v1.1.0 -- canonical source: https://github.com/YOUR_GITHUB_USER/YOUR_REPO/blob/main/CLAUDE.md
 If your Claude Project instructions differ from this file, this file wins. Update your Project instructions.
-
