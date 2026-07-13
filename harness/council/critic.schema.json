@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/council-critic.schema.json",
+  "title": "Council Critic Output Schema",
+  "description": "Schema for a single council critic's output. Used by the council orchestrator to detect malformed responses so it can enforce the retry cap (retry up to N times, then outcome=DROPPED).",
+  "type": "object",
+  "required": ["seat", "path", "outcome", "findings"],
+  "properties": {
+    "thought": {
+      "type": "string",
+      "description": "Private reasoning scratchpad. Not shown to the user or surfaced in output. Use to plan the critique, note contradictions, and reason before committing to findings. Leave empty if no pre-reasoning is needed."
+    },
+    "seat": {
+      "type": "string",
+      "enum": ["seat_1", "seat_2", "seat_3", "seat_4", "seat_5"],
+      "description": "Critic seat id. Each seat is an independent critic, ideally from a different model family."
+    },
+    "path": {
+      "type": "string",
+      "enum": ["parallel", "sequential"],
+      "description": "Which path of the dual-path council this output belongs to."
+    },
+    "outcome": {
+      "type": "string",
+      "enum": ["COMPLETED", "ABSTAINED", "GATED", "DROPPED"],
+      "description": "Per-seat outcome tag. Only DROPPED counts as a degraded seat."
+    },
+    "findings": {
+      "type": "array",
+      "description": "Zero-or-more critique findings. An empty array is valid when outcome is ABSTAINED.",
+      "items": {
+        "type": "object",
+        "required": ["severity", "verdict", "claim", "rationale", "patch_direction"],
+        "properties": {
+          "severity": {
+            "type": "string",
+            "enum": ["BLOCKER", "REAL", "SPECULATIVE"]
+          },
+          "verdict": {
+            "type": "string",
+            "enum": ["ACCEPT", "REJECT", "DECIDE"]
+          },
+          "claim": {
+            "type": "string",
+            "minLength": 10,
+            "description": "The defect or concern, stated as a complete sentence."
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 20,
+            "description": "Why this is a defect. Citations or references preferred."
+          },
+          "patch_direction": {
+            "type": "string",
+            "minLength": 10,
+            "description": "Concrete suggested edit direction (not necessarily exact text)."
+          },
+          "spec_location": {
+            "type": "string",
+            "description": "Optional: a criterion id or section name from the spec body."
+          },
+          "citations": {
+            "type": "array",
+            "description": "Optional source attribution. Backward compatible: absent on legacy findings. Each entry grounds the finding in a spec or decision doc.",
+            "items": {
+              "type": "object",
+              "required": ["doc", "anchor"],
+              "properties": {
+                "doc": {
+                  "type": "string",
+                  "description": "Document identifier: title or index of the cited spec/decision doc."
+                },
+                "anchor": {
+                  "type": "string",
+                  "description": "Quoted anchor text from the doc. Keep short (15 words or fewer) for models without a native citations API."
+                },
+                "span": {
+                  "type": "string",
+                  "description": "Optional location: a section ref (e.g. R2) or a char range (e.g. 80-152)."
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "duration_s": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Wall-clock duration of the critic call in seconds."
+    },
+    "tokens_out": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Output token count for cost accounting."
+    }
+  },
+  "additionalProperties": false
+}

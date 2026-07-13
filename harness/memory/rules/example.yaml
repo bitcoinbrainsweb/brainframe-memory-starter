@@ -1,0 +1,100 @@
+# example.yaml: per-project memory-audit rules, loaded alongside global.yaml at audit time.
+# This is a representative example. Replace the rule bodies with your own; the value
+# here is the SHAPE, the set of rule "kinds" you can express, not these specific checks.
+#
+# Protected entries bypass ALL rule kinds and auto-fix actions. Each protected entry is
+# sha256(content)[:16] of the memory entry body. Maintain the list by hand (e.g. via PR).
+# Compute one with:
+#   python3 -c "import hashlib; print(hashlib.sha256('<entry text>'.encode()).hexdigest()[:16])"
+protected_hashes: []  # populate after your first audit run identifies entries that must never be touched.
+
+rules:
+  # --- forbidden_substring: hard block on secret material landing in memory ---
+  - id: MR-EX-001
+    severity: CRITICAL
+    kind: forbidden_substring
+    description: "Entry contains a raw API key, token, or PAT literal."
+    params:
+      # Store the prefixes you scan for as unicode escapes, not literals, so the rule file
+      # itself never trips a secret scanner. Fill in your own provider's token prefixes,
+      # such as your source-control PAT prefixes and your secrets-manager token prefix.
+      substrings: ["<your-token-prefix-1>", "<your-token-prefix-2>"]
+      regex: "YOUR_SECRETS_MANAGER_TOKEN_PREFIX\\.[a-z]+\\.[A-Za-z0-9]{40,}"
+    auto_fix: true
+    fix_action:
+      type: strip_match
+      fallback_if_entire_content_matches: delete_entry
+
+  # --- forbidden_substring: block a stale/closed project being described as active ---
+  - id: MR-EX-002
+    severity: HIGH
+    kind: forbidden_substring
+    description: "Entry mentions a closed project as if it were still active."
+    params:
+      substrings: ["closed_project_slug"]  # replace with your own retired project slug
+    auto_fix: false
+
+  # --- forbidden_pattern: block a stale product pairing ---
+  - id: MR-EX-003
+    severity: HIGH
+    kind: forbidden_pattern
+    description: "Entry pairs a current project with a product name that has been renamed."
+    params:
+      regex: "Current Project Name.*Old Product Name"  # replace with your own stale pairing
+    auto_fix: false
+
+  # --- staleness_check: flag entries that reference a path that no longer exists ---
+  - id: MR-EX-004
+    severity: MEDIUM
+    kind: staleness_check
+    description: "Entry references a repo path that has been removed."
+    params:
+      path_to_check: "YOUR_ORG/YOUR_REPO/skills/example.md"
+      should_exist: false
+    auto_fix: false
+
+  # --- version_consistency: check a claimed count against a live source ---
+  - id: MR-EX-005
+    severity: MEDIUM
+    kind: version_consistency
+    description: "Entry states a count (e.g. 'N enforcement scripts') that drifts from source of truth."
+    params:
+      topic_marker: "memory vX.Y.Z"
+      claim_pattern: "(\\d+)\\s+enforcement scripts"
+      expected_value_source: "github_api"
+      source_url: "https://api.github.com/repos/YOUR_ORG/YOUR_REPO/contents/scripts/memory-system"
+      source_filter: "ext:.py"
+    auto_fix: false
+
+  # --- canonical_source_violation: names/contacts must come from one canonical file ---
+  - id: MR-EX-006
+    severity: MEDIUM
+    kind: canonical_source_violation
+    description: "Entry contains role/contact details for a person not in the canonical allowlist."
+    params:
+      canonical_file: "USER/people.md"
+      name_allowlist: ["the operator", "a collaborator", "a client contact"]  # replace with your own canonical names
+    auto_fix: false
+
+  # --- duplicate_detection: collapse near-identical entries ---
+  - id: MR-EX-007
+    severity: LOW
+    kind: duplicate_detection
+    description: "Two entries with cosine similarity >= threshold over tokenized content."
+    params:
+      threshold: 0.85
+      tokenizer: "lowercase_split"
+    auto_fix: true
+    fix_action:
+      type: keep_longer_then_older
+      min_length_delta_pct: 10
+      always_confirm: true
+
+  # --- length_check: soft cap that suggests promoting long entries to a doc ---
+  - id: MR-EX-008
+    severity: LOW
+    kind: length_check
+    description: "Entry length exceeds soft cap (suggests promotion to a longer-form note)."
+    params:
+      max_length: 800
+    auto_fix: false
