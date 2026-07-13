@@ -13,6 +13,23 @@ credentials, model strings, and project slugs are placeholders. Nothing boots un
 you bring your own database and keys. Start from the root `.env.example`, which lists
 every placeholder grouped by system.
 
+## Try it in five minutes, no accounts
+
+Before wiring up any infrastructure, you can watch four of these systems run with
+nothing but Python 3 (standard library only) -- no accounts, no network, no keys:
+
+```
+python3 harness/quickstart/demo_memory.py
+python3 harness/quickstart/demo_sessions.py
+python3 harness/quickstart/demo_council.py
+python3 harness/quickstart/demo_foreman_gates.py
+```
+
+Each runs the system's real code against local SQLite or canned, obviously-synthetic
+fixtures and prints a narrated transcript. See [quickstart/README.md](quickstart/README.md)
+for what each one shows. These are demonstrations with local storage and canned model
+responses; each system's `SETUP.md` is the real path for real use.
+
 ## The five systems
 
 | System | One line | Setup |

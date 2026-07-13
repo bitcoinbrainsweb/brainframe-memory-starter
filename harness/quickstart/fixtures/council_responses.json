@@ -1,0 +1,97 @@
+{
+  "_comment": "Canned, obviously-synthetic model responses for the council quickstart. No real API is called. Each critic value is a list of lines joined with newlines by demo_council.py; the fenced JSON block conforms to critic.schema.json. The spec under review is a toy 'Acme Widget API v1'.",
+  "critics": {
+    "1": [
+      "FINDINGS:",
+      "[severity BLOCKER] [verdict ACCEPT]",
+      "Write endpoints specify no authentication. The Endpoints section lists POST/PATCH/DELETE /widgets as open, so any caller can mutate widget state. Require a bearer token on every write path.",
+      "Cite: section Endpoints.",
+      "",
+      "```json",
+      "{\"seat\":\"seat_1\",\"path\":\"parallel\",\"outcome\":\"COMPLETED\",\"findings\":[{\"severity\":\"BLOCKER\",\"verdict\":\"ACCEPT\",\"claim\":\"Write endpoints specify no authentication and are described as open.\",\"rationale\":\"The Endpoints section lists POST/PATCH/DELETE /widgets with no auth requirement, so any caller can mutate widget state.\",\"patch_direction\":\"Require a bearer token on every write path and define the 401 response.\",\"spec_location\":\"Endpoints\"}]}",
+      "```"
+    ],
+    "2": [
+      "FINDINGS:",
+      "[severity REAL] [verdict ACCEPT]",
+      "The list endpoint GET /widgets defines no pagination or result cap. A large widget table returns unbounded payloads. Add limit and cursor query params with a documented maximum page size.",
+      "Cite: section Endpoints.",
+      "",
+      "```json",
+      "{\"seat\":\"seat_2\",\"path\":\"parallel\",\"outcome\":\"COMPLETED\",\"findings\":[{\"severity\":\"REAL\",\"verdict\":\"ACCEPT\",\"claim\":\"The list endpoint GET /widgets defines no pagination or result cap.\",\"rationale\":\"With no limit or cursor, a large widget table returns unbounded payloads and can exhaust memory on both server and client.\",\"patch_direction\":\"Add limit plus cursor query params and a documented default and maximum page size.\",\"spec_location\":\"Endpoints\"}]}",
+      "```"
+    ],
+    "3": [
+      "FINDINGS:",
+      "[severity REAL] [verdict DECIDE]",
+      "No error response schema is defined for any endpoint. Clients cannot distinguish validation errors from server faults. Define a single error envelope and list which codes each endpoint returns.",
+      "Cite: section Responses.",
+      "",
+      "```json",
+      "{\"seat\":\"seat_3\",\"path\":\"parallel\",\"outcome\":\"COMPLETED\",\"findings\":[{\"severity\":\"REAL\",\"verdict\":\"DECIDE\",\"claim\":\"No error response schema is defined for any endpoint.\",\"rationale\":\"The spec shows only success bodies, so clients cannot reliably distinguish validation errors from server faults; the shape needs a product decision.\",\"patch_direction\":\"Define a single error envelope with a code and message field and list which codes each endpoint returns.\",\"spec_location\":\"Responses\"}]}",
+      "```"
+    ],
+    "4": [
+      "FINDINGS:",
+      "[severity SPECULATIVE] [verdict DECIDE]",
+      "No rate limiting or abuse control is mentioned for the public API. An open write API with no throttling invites floods, though the right limit depends on expected traffic.",
+      "Cite: section Non-functional.",
+      "",
+      "```json",
+      "{\"seat\":\"seat_4\",\"path\":\"parallel\",\"outcome\":\"COMPLETED\",\"findings\":[{\"severity\":\"SPECULATIVE\",\"verdict\":\"DECIDE\",\"claim\":\"No rate limiting or abuse control is mentioned for the public API.\",\"rationale\":\"An open write API with no throttling invites accidental or hostile floods, though the right limit depends on expected traffic volume.\",\"patch_direction\":\"Decide a default per-token rate limit and document the 429 response and retry-after header.\",\"spec_location\":\"Non-functional\"}]}",
+      "```"
+    ],
+    "5": [
+      "FINDINGS:",
+      "[severity BLOCKER] [verdict ACCEPT]",
+      "The delete endpoint performs a hard delete with no authorization check. Like the other write paths it requires no caller identity, compounding the auth gap. Gate deletes behind auth.",
+      "Cite: section Endpoints.",
+      "",
+      "```json",
+      "{\"seat\":\"seat_5\",\"path\":\"parallel\",\"outcome\":\"COMPLETED\",\"findings\":[{\"severity\":\"BLOCKER\",\"verdict\":\"ACCEPT\",\"claim\":\"The delete endpoint performs a hard delete with no authorization check.\",\"rationale\":\"DELETE /widgets/{id} removes rows permanently and, like the other write paths, requires no caller identity, compounding the auth gap.\",\"patch_direction\":\"Gate deletes behind auth and consider a soft-delete or confirmation step.\",\"spec_location\":\"Endpoints\"}]}",
+      "```"
+    ]
+  },
+  "judge_parallel": [
+    "## Unique findings (deduped within path)",
+    "1. [seat_1, seat_5] [BLOCKER] [ACCEPT] Write paths (including hard delete) require no authentication. Two independent critics; high confidence.",
+    "2. [seat_2] [REAL] [ACCEPT] GET /widgets has no pagination or result cap.",
+    "3. [seat_3] [REAL] [DECIDE] No error response schema is defined.",
+    "4. [seat_4] [SPECULATIVE] [DECIDE] No rate limiting on the public API.",
+    "## Patch plan",
+    "APPLY: findings 1 and 2 (auth on all write paths; pagination on list).",
+    "DECIDE: findings 3 and 4 (error envelope shape; rate-limit policy) need a product call.",
+    "REJECT: none.",
+    "## Disagreements surfaced",
+    "None material. Severity differs on abuse control (SPECULATIVE) vs auth (BLOCKER), which is expected."
+  ],
+  "judge_sequential": [
+    "## Unique findings (deduped within path)",
+    "1. [seat_1] [BLOCKER] [ACCEPT] Write endpoints require no authentication.",
+    "2. [seat_2] [REAL] [ACCEPT] GET /widgets has no pagination; builds on finding 1 (an open, unbounded list is worse).",
+    "3. [seat_3] [REAL] [DECIDE] No error response schema; the chain noted this blocks client handling of the auth failures above.",
+    "## Patch plan",
+    "APPLY: findings 1 and 2.",
+    "DECIDE: finding 3 (error envelope).",
+    "REJECT: none.",
+    "## Disagreements surfaced",
+    "None. The chain reinforced rather than contradicted the parallel reads."
+  ],
+  "reviewer": [
+    "## Process score",
+    "- Coverage 8/10: auth, pagination, errors, and abuse control all surfaced.",
+    "- Independence 9/10: path-A and path-B reached the auth finding without shared context.",
+    "- Signal-to-noise 8/10: one SPECULATIVE finding, correctly marked.",
+    "- Judge quality per path 8/10: both judges grouped equivalent findings cleanly.",
+    "- Abstention handling 10/10: no seat abstained; none was dropped.",
+    "## Outcome score",
+    "- Substantive vs cosmetic 9/10: the top findings are real security and scaling gaps.",
+    "- New problems introduced 0: no finding contradicts a spec requirement that exists.",
+    "- Systemic blind spots: neither path checked auth on the read paths; minor.",
+    "## Path-A vs Path-B audit",
+    "- Patterns different? Path-B chained findings; path-A found more breadth (rate limiting).",
+    "- Both findings equivalent? Yes: the auth finding is genuinely the same defect.",
+    "## Verdict",
+    "REVISE"
+  ]
+}

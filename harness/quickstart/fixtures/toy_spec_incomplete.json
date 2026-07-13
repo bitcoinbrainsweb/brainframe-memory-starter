@@ -1,0 +1,9 @@
+{
+  "_comment": "Toy spec that FAILS manifest_lint: body is a bare pointer, acceptance is empty, no scope. All three violations reported in one pass.",
+  "slug": "acme-widget-broken",
+  "body": "see docs/widgets.md",
+  "acceptance": [],
+  "requirements_approved": true,
+  "design_approved": true,
+  "tasks_approved": true
+}

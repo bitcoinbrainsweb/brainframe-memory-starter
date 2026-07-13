@@ -1,0 +1,26 @@
+{
+  "_comment": "Toy changed-file sets for substance_delta.evaluate_deliverable_delta. 'delivering' contains a real product file; 'empty_calorie' contains only a doc and an import-only package scaffold, so the substance gate fails it.",
+  "delivering": [
+    {
+      "path": "src/api/widgets_list.py",
+      "status": "A",
+      "added_content_lines": [
+        "def list_widgets(limit, cursor=None):",
+        "    limit = min(int(limit), 100)",
+        "    return db.query(widgets, after=cursor, limit=limit)"
+      ]
+    }
+  ],
+  "empty_calorie": [
+    {
+      "path": "docs/CHANGELOG.md",
+      "status": "M",
+      "added_content_lines": ["- shipped the widgets list endpoint"]
+    },
+    {
+      "path": "src/api/__init__.py",
+      "status": "A",
+      "added_content_lines": ["from .widgets_list import list_widgets"]
+    }
+  ]
+}
