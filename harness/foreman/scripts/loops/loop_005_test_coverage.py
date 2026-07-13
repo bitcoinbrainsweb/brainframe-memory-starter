@@ -11,7 +11,7 @@ import re
 import time
 from typing import Callable
 
-from scripts.foreman.prompts import render_loop_005_prompt
+from ..prompts import render_loop_005_prompt
 
 _EXIT_SUCCESS_RE = re.compile(r"\bEXIT\s+SUCCESS\b")
 _EXIT_ITERATION_RE = re.compile(

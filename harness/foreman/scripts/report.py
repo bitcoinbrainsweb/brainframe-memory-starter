@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from scripts.foreman.models import ExclusionRecord, HaltChain, HaltRecord, ParkedRecord
+from .models import ExclusionRecord, HaltChain, HaltRecord, ParkedRecord
 
 
 @dataclass

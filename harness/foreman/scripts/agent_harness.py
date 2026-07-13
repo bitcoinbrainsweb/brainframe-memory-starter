@@ -14,8 +14,6 @@ import time
 from dataclasses import dataclass, field
 from typing import Callable, Any
 
-import httpx
-
 ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
 ANTHROPIC_API_VERSION = "2023-06-01"
 
@@ -100,7 +98,11 @@ class AgentHarness:
         self._tool_schemas = tool_schemas
         self._dispatcher = dispatcher
         self._token_budget = token_budget
-        self._client = httpx_client if httpx_client is not None else httpx.Client()
+        if httpx_client is not None:
+            self._client = httpx_client
+        else:
+            import httpx  # lazy: only needed to build a default client
+            self._client = httpx.Client()
         self._retry_delays = retry_delays if retry_delays is not None else RETRY_DELAYS
         self._headers = {
             "x-api-key": api_key,

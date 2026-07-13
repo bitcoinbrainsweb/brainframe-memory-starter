@@ -13,8 +13,8 @@ import urllib.request
 from pathlib import Path
 from typing import Protocol, runtime_checkable
 
-from scripts.foreman.antislop_lint import run_antislop_lint
-from scripts.foreman.models import (
+from .antislop_lint import run_antislop_lint
+from .models import (
     AntislopConfig,
     InvariantResult,
     LintResult,
@@ -52,7 +52,7 @@ class NoOpHarness:
 class SupabaseInvariantHarness:
     """Phase 2 stub: superseded by H1 harness_caller.SupabaseInvariantHarness.
 
-    Kept for backward compatibility. Use scripts.foreman.harness_caller for production.
+    Kept for backward compatibility. Use harness.foreman.scripts.harness_caller for production.
     """
 
     def __init__(self, rpc_url: str, anon_key: str) -> None:
@@ -152,7 +152,7 @@ def run_substance_discriminator(
     Returns SubstanceResult. Fails closed on subprocess error.
     """
     result = subprocess.run(
-        [sys.executable, "scripts/foreman/foreman_substance_discriminator.py",
+        [sys.executable, "harness/foreman/scripts/foreman_substance_discriminator.py",
          "--spec-slug", spec_slug,
          "--run-id", run_id,
          "--traceability", str(traceability_path),

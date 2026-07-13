@@ -18,8 +18,8 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
-from scripts.foreman.ci_gate import CIGate, CIOutcome, park_reason_for_ci_outcome
-from scripts.foreman.git_ops import (
+from .ci_gate import CIGate, CIOutcome, park_reason_for_ci_outcome
+from .git_ops import (
     GPGKeyUnavailableError,
     GitError,
     OriginCheckResult,
@@ -34,18 +34,18 @@ from scripts.foreman.git_ops import (
     push_branch,
     push_ref,
 )
-from scripts.foreman.heartbeat import ForemanHeartbeat
-from scripts.foreman.intake import is_approved
-from scripts.foreman.ledger import LedgerBackend
-from scripts.foreman.models import (
+from .heartbeat import ForemanHeartbeat
+from .intake import is_approved
+from .ledger import LedgerBackend
+from .models import (
     BUILDER_MODEL,
     SESSION_ID,
     VERIFIER_MODEL,
     SameFamilyError,
     assert_different_family,
 )
-from scripts.foreman.prompts import render_build_prompt, render_verify_prompt
-from scripts.foreman.transport import AgentTransport
+from .prompts import render_build_prompt, render_verify_prompt
+from .transport import AgentTransport
 
 
 def _run_id() -> str:

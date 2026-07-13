@@ -68,3 +68,6 @@ per-shard heartbeats, so a stalled shard can be re-dispatched.
 - The pool ships as a threading-based reference implementation. Swap in your own
   executor (processes, a job queue, remote workers) as long as you keep the
   budget-derived cap and the admit-after-exit rule.
+- This `worker_pool.py` is the single source of truth for the pool. The Foreman
+  system re-exports it (via `harness/foreman/scripts/worker_pool.py`) rather than
+  copying it, so both systems share one implementation.

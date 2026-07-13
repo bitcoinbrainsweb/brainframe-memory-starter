@@ -18,7 +18,7 @@ import urllib.request
 from enum import Enum
 from pathlib import Path
 
-from scripts.foreman.substance_delta import HARNESS_SCAFFOLD_PATHS
+from .substance_delta import HARNESS_SCAFFOLD_PATHS
 
 _logger = logging.getLogger("foreman.git_ops")
 

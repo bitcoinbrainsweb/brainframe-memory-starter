@@ -9,8 +9,8 @@ from __future__ import annotations
 
 import os
 
-from scripts.foreman.models import BUILDER_MODEL, VERIFIER_MODEL
-from scripts.foreman.worker_pool import MEMORY_DISCIPLINE_PREAMBLE
+from .models import BUILDER_MODEL, VERIFIER_MODEL
+from .worker_pool import MEMORY_DISCIPLINE_PREAMBLE
 
 
 # trace emission boilerplate injected into build prompts.

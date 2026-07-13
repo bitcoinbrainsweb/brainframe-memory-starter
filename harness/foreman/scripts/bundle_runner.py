@@ -10,20 +10,20 @@ import sys
 import time
 from pathlib import Path
 
-from scripts.foreman.bundle import (
+from .bundle import (
     BundleIntake,
     BundleResolution,
     _all_approved,
     _validate_attestation,
 )
-from scripts.foreman.antislop_lint import format_lint_findings
-from scripts.foreman.gates import (
+from .antislop_lint import format_lint_findings
+from .gates import (
     InvariantHarness,
     NoOpHarness,
     run_antislop_lint_gate,
     verify_model_precondition,
 )
-from scripts.foreman.git_ops import (
+from .git_ops import (
     GitError,
     OriginCheckResult,
     _git,
@@ -38,9 +38,9 @@ from scripts.foreman.git_ops import (
     push_branch,
     push_ref,
 )
-from scripts.foreman.ledger import LedgerBackend, _redact_detail
-from scripts.foreman.manifest_lint import lint_spec
-from scripts.foreman.models import (
+from .ledger import LedgerBackend, _redact_detail
+from .manifest_lint import lint_spec
+from .models import (
     BundleConfig,
     ForemanRunLocked,
     HaltChain,
@@ -48,11 +48,11 @@ from scripts.foreman.models import (
     ParkedRecord,
     TaskStatus,
 )
-from scripts.foreman.prompts import render_build_prompt, render_verify_prompt
-from scripts.foreman.pty_harness import FOREMAN_SPEC_WALLCLOCK_CEILING
-from scripts.foreman.queue import TaskQueue
-from scripts.foreman.report import RunReport
-from scripts.foreman.transport import AgentTransport
+from .prompts import render_build_prompt, render_verify_prompt
+from .pty_harness import FOREMAN_SPEC_WALLCLOCK_CEILING
+from .queue import TaskQueue
+from .report import RunReport
+from .transport import AgentTransport
 
 
 # Bug 1: a MALFORMED verify verdict (unparseable/truncated output) is retried at
@@ -139,7 +139,7 @@ def _fetch_compare_diff(repo: str, base: str, branch: str) -> str | None:
     resolver; never logged.
     """
     import httpx
-    from scripts.foreman.git_ops import _resolve_push_token
+    from .git_ops import _resolve_push_token
 
     # repo is "owner/name"; resolve a token that can actually reach it so a
     # token scoped to other repos is skipped rather than 404-ing the compare.
@@ -210,7 +210,7 @@ def _fetch_spec_body_from_comms(comms_path: str) -> str:
     skipped. Raises SpecBodyUnavailable on any failure. The token is never logged.
     """
     import httpx
-    from scripts.foreman.git_ops import _resolve_push_token
+    from .git_ops import _resolve_push_token
 
     token = _resolve_push_token(f"https://github.com/{_COMMS_REPO}")
     if not token:
@@ -273,13 +273,13 @@ class BundleRunner:
         # CliAgentTransport runs via the Claude CLI on subscription (zero marginal cost).
         # To allow non-CLI transports in unit tests: set FOREMAN_ALLOW_API_TRANSPORT=1.
         import os as _os
-        from scripts.foreman.transport import CliAgentTransport as _CliAgentTransport
+        from .transport import CliAgentTransport as _CliAgentTransport
         if not isinstance(transport, _CliAgentTransport):
             if _os.environ.get("FOREMAN_ALLOW_API_TRANSPORT", "0").strip() != "1":
                 raise RuntimeError(
                     "H-CREDIT-001: BundleRunner transport is not CliAgentTransport. "
                     "Non-CLI transports call the Anthropic API and burn credits. "
-                    "Use scripts/foreman/run_bundle.py (CliAgentTransport). "
+                    "Use harness/foreman/scripts/run_bundle.py (CliAgentTransport). "
                     "To override for tests only: FOREMAN_ALLOW_API_TRANSPORT=1"
                 )
 
@@ -301,7 +301,7 @@ class BundleRunner:
         branch inside that clone (Bug 2); an unresolvable base is an evaluation
         error -> INCONCLUSIVE, never a FAIL.
         """
-        from scripts.foreman.substance_delta import (
+        from .substance_delta import (
             DeltaResult,
             delta_from_git,
             evaluate_deliverable_delta,
@@ -336,8 +336,8 @@ class BundleRunner:
         the authority on the delta); a measured delta containing scaffolding is
         reported so the caller can reject the build.
         """
-        from scripts.foreman.git_ops import _scaffolding_leaks
-        from scripts.foreman.substance_delta import delta_from_git
+        from .git_ops import _scaffolding_leaks
+        from .substance_delta import delta_from_git
         if not commit_sha:
             return []
         try:
@@ -355,19 +355,19 @@ class BundleRunner:
         key = _os.environ.get("SUPABASE_SERVICE_KEY")
         if not url or not key:
             return None
-        from scripts.foreman.live_db_assert import SupabaseLiveDbClient
+        from .live_db_assert import SupabaseLiveDbClient
         return SupabaseLiveDbClient(url, key)
 
     def _check_live_db(self, base_sha: str, commit_sha: str | None):
         """F4: when the delta ships migration SQL creating Supabase objects,
         assert they exist live + one write-then-read smoke. SKIP otherwise."""
-        from scripts.foreman.live_db_assert import (
+        from .live_db_assert import (
             LiveDbResult,
             assert_live_db,
             extract_db_deliverables,
             is_migration_path,
         )
-        from scripts.foreman.substance_delta import delta_from_git
+        from .substance_delta import delta_from_git
         if not commit_sha:
             return LiveDbResult("SKIP", reason="no-commit")
         try:
@@ -400,8 +400,8 @@ class BundleRunner:
         cold verifier's read of A/B is a semantic supplement, not the sole
         mechanism. SKIP when the delta ships no UI files and the spec declares no
         write batch. Fails closed if the delta cannot be measured."""
-        from scripts.foreman.conformance import ConformanceResult, run_conformance_gate
-        from scripts.foreman.substance_delta import delta_from_git
+        from .conformance import ConformanceResult, run_conformance_gate
+        from .substance_delta import delta_from_git
         if not commit_sha:
             return ConformanceResult("SKIP", reason="no-commit-sha")
         try:
@@ -532,7 +532,7 @@ class BundleRunner:
         the run (a reconcile failure must not block a fresh build)."""
         import sys
         try:
-            from scripts.foreman.reconcile import reconcile_killed_runs
+            from .reconcile import reconcile_killed_runs
             reconciled = reconcile_killed_runs(self._ledger)
             for r in reconciled:
                 self._emit(
@@ -620,7 +620,7 @@ class BundleRunner:
             "FOREMAN_RUN_LOCK_STALE_SECONDS=0 and re-run to reap immediately.\n"
             "\n"
             "To force override:\n"
-            f"  python scripts/foreman/run_bundle.py {slug_args} --force-unlock"
+            f"  python harness/foreman/scripts/run_bundle.py {slug_args} --force-unlock"
         )
         raise ForemanRunLocked(msg)
 
@@ -1286,7 +1286,7 @@ class BundleRunner:
                 # verifier's checklist read above remains a semantic supplement.
                 # A FAIL routes to the standard R5 park/retry path (
                 # direct-push mode).
-                from scripts.foreman.conformance import format_conformance_findings
+                from .conformance import format_conformance_findings
                 conf = self._check_conformance(base_sha, build_result.commit_sha, spec, run_id)
                 self._emit(run_id, "conformance_result", task_id=task_id, spec_slug=slug,
                            detail={"verdict": conf.verdict, "checklist": conf.checklist,
@@ -1549,7 +1549,7 @@ class BundleRunner:
 
                         if _inline_pass:
                             # Run conformance gate on fix commit.
-                            from scripts.foreman.conformance import format_conformance_findings
+                            from .conformance import format_conformance_findings
                             conf = self._check_conformance(base_sha, fix_result.commit_sha, spec, run_id)
                             self._emit(run_id, "conformance_result", task_id=task_id, spec_slug=slug,
                                        detail={"verdict": conf.verdict, "checklist": conf.checklist,
@@ -1761,7 +1761,7 @@ class BundleRunner:
                                     # falling through. Actually we cannot jump into the PASS
                                     # block. We must park this sub-result and return committed.
                                     # Inline the merge path again for the second fix pass.
-                                    from scripts.foreman.conformance import format_conformance_findings as _fcf2
+                                    from .conformance import format_conformance_findings as _fcf2
                                     conf2 = self._check_conformance(base_sha, fp2_result.commit_sha, spec, run_id)
                                     if conf2.verdict == "FAIL":
                                         halts = queue.park(task, "conformance-checklist-failed", failure_trail)

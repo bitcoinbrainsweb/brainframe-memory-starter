@@ -4,9 +4,9 @@ from __future__ import annotations
 import os
 from datetime import datetime, timedelta, timezone
 
-from scripts.foreman.heartbeat import heartbeat_stale_threshold_s
-from scripts.foreman.ledger import LedgerBackend
-from scripts.foreman.models import (
+from .heartbeat import heartbeat_stale_threshold_s
+from .ledger import LedgerBackend
+from .models import (
     HaltChain,
     HaltRecord,
     InvalidTransition,

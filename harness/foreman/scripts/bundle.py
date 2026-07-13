@@ -4,9 +4,9 @@ from __future__ import annotations
 from collections import defaultdict, deque
 from dataclasses import dataclass, field
 
-from scripts.foreman.ledger import LedgerBackend
-from scripts.foreman.manifest_lint import lint_bundle, lint_spec
-from scripts.foreman.models import CycleError, ExclusionRecord
+from .ledger import LedgerBackend
+from .manifest_lint import lint_bundle, lint_spec
+from .models import CycleError, ExclusionRecord
 
 
 @dataclass
