@@ -15,9 +15,9 @@ class RunReport:
     dependent_halted: list[HaltRecord] = field(default_factory=list)
     excluded: list[ExclusionRecord] = field(default_factory=list)
     dependent_halt_chains: list[HaltChain] = field(default_factory=list)
-    # R1.AC4: spec slugs that were appended to a live run (flagged appended=true).
+    # spec slugs that were appended to a live run (flagged appended=true).
     appended: list[str] = field(default_factory=list)
-    # R2.AC4 + operational one-shot notes (e.g. throttled heartbeat failures).
+    # operational one-shot notes (e.g. throttled heartbeat failures).
     notes: list[str] = field(default_factory=list)
 
     def render(self) -> str:

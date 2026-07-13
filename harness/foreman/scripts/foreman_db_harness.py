@@ -235,7 +235,7 @@ def _do_query(
     except Exception:
         return _emit(_verdict(invariant_id, "FAIL", 0, "db-unreachable"), service_role_key)
 
-    # R6.AC2: confirm service_role before any query
+    # confirm service_role before any query
     try:
         with conn.cursor() as cur:
             cur.execute("SELECT current_role()")
@@ -299,12 +299,12 @@ def run_harness(
         import psycopg2  # noqa: PLC0415
         connect_fn = psycopg2.connect
 
-    # R3.AC3: caller identity
+    # caller identity
     token = caller_token if caller_token is not None else os.environ.get("FOREMAN_CALLER_TOKEN", "")
     if not token:
         return _verdict(invariant_id, "FAIL", 0, "caller-not-authorized")
 
-    # R1.AC2: load registry
+    # load registry
     try:
         registry = load_registry(registry_path)
     except (FileNotFoundError, json.JSONDecodeError):
@@ -314,17 +314,17 @@ def run_harness(
     if entry is None:
         return _verdict(invariant_id, "FAIL", 0, "invariant-not-registered")
 
-    # R1.AC3: registry entry must declare a project that matches the caller's spec_slug
+    # registry entry must declare a project that matches the caller's spec_slug
     # project-mismatch fires when absent, empty, or does not match spec_slug
     if not entry.get("project") or entry.get("project") != spec_slug:
         return _verdict(invariant_id, "FAIL", 0, "project-mismatch")
 
-    # R1.AC4: content hash integrity
+    # content hash integrity
     violation_query = entry.get("violation_query", "")
     if content_hash(violation_query) != entry.get("content_hash", ""):
         return _verdict(invariant_id, "FAIL", 0, "invariant-ref-mismatch")
 
-    # R5.AC4: write invariants unconditionally rejected
+    # write invariants unconditionally rejected
     if entry.get("allows_write", False):
         return _verdict(invariant_id, "FAIL", 0, "write-invariant-rejected")
 

@@ -23,6 +23,8 @@ every placeholder grouped by system.
 | council | N independent critics from different model families review a spec on two paths, judged, merged, and audited by a blinded post-run reviewer. | [council/SETUP.md](council/SETUP.md) |
 | subagents | Fan a task out across sub-workers with a host-memory-budgeted concurrency cap, admit-after-exit scheduling, and shard-to-disk assembly. | [subagents/SETUP.md](subagents/SETUP.md) |
 
+Each `SETUP.md` opens with a runnable-vs-reference status line, so you know up front whether a system boots as-is or needs your inputs; a `reference-only` system ships the real logic but omits some internal sibling modules by design, and lists exactly which ones under its What is stubbed section.
+
 ## A few rules run through all of them
 
 - The agent that builds and the agent that verifies must be different model

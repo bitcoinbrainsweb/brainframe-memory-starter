@@ -160,7 +160,7 @@ class TaskQueue:
 
         - Rows with commit_sha IS NOT NULL: transition to committed (OQ-F2-2).
         - Rows with status IN (building, verifying, merging, ci-gating) AND stale heartbeat:
-          - ci-gating with ci_verdict populated: advance to merging (gate result already known, R6.AC4g)
+          - ci-gating with ci_verdict populated: advance to merging (gate result already known)
           - otherwise: reset to queued, clear claimed_by
         - Stale threshold:
           - last_heartbeat_at present: FOREMAN_STALE_MISS_COUNT * FOREMAN_HEARTBEAT_INTERVAL_S (default 180s)
@@ -247,7 +247,7 @@ class TaskQueue:
             if not is_stale:
                 continue
 
-            # R6.AC4g: ci-gating with ci_verdict already written → advance to merging
+            # ci-gating with ci_verdict already written → advance to merging
             if row["status"] == TaskStatus.CI_GATING.value and row.get("ci_verdict"):
                 if rows_dict is not None:
                     row["status"] = TaskStatus.MERGING.value
@@ -274,7 +274,7 @@ class TaskQueue:
     def reap_orphans(self, stale_minutes: int | None = None) -> list[str]:
         """Park tasks stuck in building/verifying past the staleness window.
 
-        R5.AC1: tasks left in-flight when a run was killed are parked with reason
+        tasks left in-flight when a run was killed are parked with reason
         'orphaned-stale-claim' (an operational reason the R4 breaker excludes), so
         they never block a future run. Idempotent: a second call reaps nothing.
         Run-scoped. Returns the list of reaped spec_slugs.

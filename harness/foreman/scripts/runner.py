@@ -1,11 +1,11 @@
 """Phase 1 Foreman runner: single-spec build-verify-commit loop.
 
-Implements the inference subset of R2, R3, R4.AC1, R7.AC1-AC3, R9.AC1/AC4.
+Implements the inference subset of the spec.
 Write-ahead ledger: every DB transition precedes its action.
-Ground-truth gate (R9) is fully real: uses git ls-remote + merge-base.
+Ground-truth gate is fully real: uses git ls-remote + merge-base.
 
 Phase 3 additions:
-- R6.AC4: CI gate (verifying -> ci-gating -> merging | parked)
+- CI gate (verifying -> ci-gating -> merging | parked)
 - U-02: GPG-signed merge commit + DCO sign-off on base_ref
 - R11: heartbeat thread (started on build, stopped on terminal transition)
 """
@@ -81,7 +81,7 @@ class RunForeman:
 
     Phase 1 scope:
     - Single spec (no bundle ordering, no dependents)
-    - Build (Sonnet) + cold verify (Opus/Fable, different family)
+    - Build agent + cold verify agent from a different model family
     - R9 ground-truth gate (fully real git ls-remote + merge-base)
     - ff-only merge + post-push ref check
     - Write-ahead ledger throughout
@@ -286,7 +286,7 @@ class RunForeman:
                 no_op=True,
             )
 
-        # CONFIRMED -- R6.AC4: CI gate before merge
+        # CONFIRMED -- CI gate before merge
         # Write-ahead: ci-gating (precedes polling)
         self.ledger.transition(
             run_uuid, run_id, cfg.spec_slug,
@@ -313,7 +313,7 @@ class RunForeman:
             ci_gate = CIGate()
             ci_outcome, ci_verdict = ci_gate.poll(owner, repo_name, build_result.commit_sha)
 
-        # Write ci_verdict before any merge transition (R6.AC4f write-ahead)
+        # Write ci_verdict before any merge transition (write-ahead)
         self.ledger.update_data(run_uuid, cfg.spec_slug, {"ci_verdict": ci_verdict})
 
         if ci_outcome not in (CIOutcome.PASS, CIOutcome.PASS_NO_CI):
@@ -411,7 +411,7 @@ class RunForeman:
         confirm_git_state(cfg.working_dir, cfg.remote_url, expected_branch=cfg.base_ref)
         push_ref(cfg.working_dir, cfg.remote_url, cfg.base_ref)
 
-        # --- R9.AC4: post-push ref-advanced check ---
+        # --- post-push ref-advanced check ---
         confirm_git_state(cfg.working_dir, cfg.remote_url)
         push_ok = post_push_check(
             working_dir=cfg.working_dir,
@@ -434,7 +434,7 @@ class RunForeman:
                 run_id=run_id,
                 status="parked",
                 park_reason="post-push-ref-not-advanced",
-                message="R9.AC4: remote ref did not advance after push (local-only push)",
+                message="remote ref did not advance after push (local-only push)",
             )
 
         # --- Write-ahead: committed (precedes nothing -- this is terminal) ---

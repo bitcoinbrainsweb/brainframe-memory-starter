@@ -1,6 +1,6 @@
 """Local git operations for the Foreman runner.
 
-R9.AC1/AC4, H2/H3: ground-truth gate against origin.
+H2/H3: ground-truth gate against origin.
 All operations confirm working_dir and remote_url before executing.
 Never assume working dir, branch, or remote URL.
 """
@@ -544,7 +544,7 @@ def check_origin_ground_truth(
     claimed_sha: str,
     base_sha: str,
 ) -> tuple[OriginCheckResult, str | None]:
-    """R9.AC1/AC4, H2/H3: ground-truth gate against origin.
+    """H2/H3: ground-truth gate against origin.
 
     Proves the claimed SHA is ancestor-or-equal of the exact target ref on origin
     (not merely present anywhere on origin).
@@ -599,7 +599,7 @@ def post_push_check(
     base_ref: str,
     merged_sha: str,
 ) -> bool:
-    """R9.AC4: confirm remote ref advanced to or past merged_sha after push.
+    """confirm remote ref advanced to or past merged_sha after push.
 
     Returns True if the remote ref now contains merged_sha.
     Returns False (local-only push) if remote ref did not advance.

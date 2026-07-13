@@ -1,3 +1,6 @@
+> Status: runnable with your inputs
+> This system ships a schema plus agent skills rather than a Python entrypoint; apply `SCHEMA.sql` to your own Postgres/Supabase, edit the example slugs, and install the skills to use it (SQL not boot-tested here, no local Postgres).
+
 # Sessions system: SETUP
 
 ## What it does

@@ -1,4 +1,4 @@
-"""BundleRunner: Phase 2 orchestration layer (R1, R4.AC2, R5, R7, R9).
+"""BundleRunner: Phase 2 orchestration layer.
 
 Owns the build-verify-retry loop for each task in a bundle.
 Phase 1 modules (runner.py, git_ops.py, prompts.py, transport.py) are consumed unchanged.
@@ -100,7 +100,7 @@ def _delete_remote_branch(working_dir: Path, remote_url: str, branch: str) -> No
 def _preserve_remote_branch(
     working_dir: Path, remote_url: str, branch: str, run_id: str, slug: str, attempt: int
 ) -> str | None:
-    """R1.AC4: never discard a build branch on the retry/wedge path. Rename the
+    """never discard a build branch on the retry/wedge path. Rename the
     remote ref to wedged/{run_id}/{slug}/{attempt} (push old ref to the new name,
     then delete the old name). Degrades to leaving the original branch in place on
     any failure; a preservation hiccup must never take down the run. Returns the
@@ -393,7 +393,7 @@ class BundleRunner:
         return assert_live_db(deliv, client)
 
     def _check_conformance(self, base_sha: str, commit_sha: str | None, spec: dict, run_id: str):
-        """H7 (R3.AC2a): mechanical conformance gate for Checklists A/B.
+        """H7: mechanical conformance gate for Checklists A/B.
 
         Runs the deterministic subset (max-width/token-override/grid/density;
         vendor-self-source ratio/uniform-value/sample-size) as a HARD gate. The
@@ -425,7 +425,7 @@ class BundleRunner:
         spec_slug: str | None = None,
         detail: dict | None = None,
     ) -> None:
-        """Fire-and-forget event emit. Redacts secrets and never propagates exceptions (R3.AC3+AC4)."""
+        """Fire-and-forget event emit. Redacts secrets and never propagates exceptions."""
         import sys
         try:
             safe_detail = _redact_detail(detail) if detail else None
@@ -434,10 +434,10 @@ class BundleRunner:
             print(f"[run-event] emit failed: {exc}", file=sys.stderr)
 
     def _append_gate_reason(self, slug: str, spec: dict, committed_slugs: list[str]) -> str | None:
-        """R1.AC2: apply the intake gates to an appended spec. Returns the standard
+        """apply the intake gates to an appended spec. Returns the standard
         per-spec exclusion reason if it fails a gate, or None if it passes.
 
-        Mirrors BundleIntake.resolve (approval, R1.AC4 attestation, already-committed)
+        Mirrors BundleIntake.resolve (approval, attestation, already-committed)
         so an appended spec is held to the same bar as an intake-time spec.
         """
         if not spec:
@@ -470,7 +470,7 @@ class BundleRunner:
 
     _LOCK_STATUSES = frozenset({"queued", "building", "verifying", "merging"})
     # Operational parks are retryable on the next run and are excluded from the
-    # repeat-failure circuit breaker (R4.AC1a). verify-malformed joins this set:
+    # repeat-failure circuit breaker. verify-malformed joins this set:
     # a spec whose verifier only ever emitted unreadable output was never
     # genuinely judged, so it must be retryable, not terminally broken (Bug 1).
     # spec-body-unavailable joins it too: a transient bad token / 404 / network
@@ -498,8 +498,8 @@ class BundleRunner:
     def _circuit_broken(self, run_id: str, slug: str) -> str | None:
         """R4: if the last N parks for this spec in this run share a non-operational
         park_reason, return that reason (the breaker trips). Else None.
-        N from FOREMAN_CIRCUIT_BREAKER_N (default 3). Operational reasons (R4.AC1a)
-        and prior-run parks (R4.AC1b, query is run-scoped) do not count.
+        N from FOREMAN_CIRCUIT_BREAKER_N (default 3). Operational reasons
+        and prior-run parks (query is run-scoped) do not count.
         """
         import os as _os
         n = int(_os.environ.get("FOREMAN_CIRCUIT_BREAKER_N", "3"))
@@ -545,7 +545,7 @@ class BundleRunner:
             print(f"[reconcile] startup kill-sweep failed: {exc}", file=sys.stderr)
 
     def _check_single_flight(self, spec_slugs: list[str]) -> None:
-        """Single-flight guard (R1, R2). Raises ForemanRunLocked on live in-flight tasks.
+        """Single-flight guard. Raises ForemanRunLocked on live in-flight tasks.
 
         Stale tasks (updated_at older than FOREMAN_RUN_LOCK_STALE_SECONDS) are reaped
         and RESET TO QUEUED (retryable), not terminally parked -- a run killed
@@ -636,7 +636,7 @@ class BundleRunner:
 
         # Single-flight guard (R1, R2, R3): refuse to start if another run is in flight.
         if force_unlock:
-            # R3.AC1: emit override event before proceeding; run_id not yet minted so use placeholder.
+            # emit override event before proceeding; run_id not yet minted so use placeholder.
             # We emit after run_id is minted below; store the flag and emit then.
             pass
         else:
@@ -707,7 +707,7 @@ class BundleRunner:
                 task_id = task.get("id")
                 spec = self._ledger.fetch_spec(slug) or {}
 
-                # R1.AC1/AC2/AC4: a task the loop picks up that was not part of the
+                # a task the loop picks up that was not part of the
                 # intake resolution was appended to the live run. Apply the same intake
                 # gates now (approval, attestation, already-committed); a gate failure
                 # parks with the standard exclusion reason rather than being ignored.
@@ -727,7 +727,7 @@ class BundleRunner:
                                                          halted_slugs=[h.spec_slug for h in halts]))
                         continue
 
-                # R9.AC3: model precondition gate
+                # model precondition gate
                 if self._api_key:
                     pre = verify_model_precondition(cfg.builder_model, self._api_key)
                     if not pre.ok:
@@ -744,7 +744,7 @@ class BundleRunner:
                             halt_chains.append(HaltChain(parked_slug=slug, halted_slugs=[h.spec_slug for h in halts]))
                         continue
 
-                # R9.AC2: H1 invariant gate (if spec declares write_invariant)
+                # H1 invariant gate (if spec declares write_invariant)
                 if spec.get("write_invariant"):
                     invariant_id = spec["write_invariant"]
                     try:
@@ -882,7 +882,7 @@ class BundleRunner:
                 if callable(set_task):
                     set_task(slug, run_id)
 
-                # R2.AC1: bind the liveness heartbeat sink for this task so the watchdog
+                # bind the liveness heartbeat sink for this task so the watchdog
                 # writes last_heartbeat_at driven by transport output activity.
                 set_sink = getattr(self._transport, "set_heartbeat_sink", None)
                 if callable(set_sink):
@@ -891,7 +891,7 @@ class BundleRunner:
                 # Run the build-verify-retry loop
                 result = self._run_task(task, run_id, run_uuid, spec, queue)
 
-                # R2.AC4: heartbeat write failures are throttled and noted once per run.
+                # heartbeat write failures are throttled and noted once per run.
                 hb_failures = int(getattr(self._transport, "last_heartbeat_failures", 0) or 0)
                 if hb_failures and not hb_failure_noted:
                     run_notes.append(
@@ -925,7 +925,7 @@ class BundleRunner:
             )
 
             if not resolution.ordered and not appended_slugs:
-                # Zero specs queued at intake (e.g. all excluded by the R1.AC4 XOR
+                # Zero specs queued at intake (e.g. all excluded by the XOR
                 # attestation gate) and nothing appended mid-run. This is NOT a normal
                 # completion -- mark the run 'no_intake' and record every exclusion so it
                 # is not a silent 0/0/0 (run fm-20260705-2346 exited 'completed' with
@@ -943,7 +943,7 @@ class BundleRunner:
                 final_status = "completed"
 
             if appended_slugs:
-                # R1.AC4: appended specs are reported alongside intake-time specs.
+                # appended specs are reported alongside intake-time specs.
                 final_report = {
                     **(final_report or {}),
                     "appended": list(appended_slugs),
@@ -1011,7 +1011,7 @@ class BundleRunner:
             _verify_t0 = time.monotonic()
             verify_result = self._transport.verify(verify_prompt, cfg.verifier_model)
             elapsed += time.monotonic() - _verify_t0
-            # R4.AC1: persist raw verifier output tail in the verify_result event.
+            # persist raw verifier output tail in the verify_result event.
             raw_tail = (verify_result.raw_output or "")[-4000:]
             self._emit(run_id, "verify_result", task_id=task_id, spec_slug=slug,
                        detail={
@@ -1040,7 +1040,7 @@ class BundleRunner:
         task_id = task.get("id")
         failure_trail: dict = {}
 
-        # R3.AC1: hydrate prior findings from the most recent failed run for this spec.
+        # hydrate prior findings from the most recent failed run for this spec.
         # Only injected into attempt-0; subsequent rebuild attempts carry live findings.
         _prior_fn = getattr(self._ledger, "fetch_prior_verify_findings", None)
         cross_run_findings: str | None = None
@@ -1061,7 +1061,7 @@ class BundleRunner:
         spec_wallclock_secs: float = 0.0
 
         # fix_budget_remaining: tracks how many fix passes remain for this task this run.
-        # R2.AC2: fix passes consume fix_budget, not build attempts.
+        # fix passes consume fix_budget, not build attempts.
         import os as _os
         fix_forward_max = int(_os.environ.get("FOREMAN_FIX_FORWARD_MAX_FINDINGS", "3"))
         fix_budget_remaining = int(_os.environ.get("FOREMAN_FIX_BUDGET", "2"))
@@ -1070,7 +1070,7 @@ class BundleRunner:
         last_build_branch: str | None = None
 
         for attempt in range(2):
-            # R1.AC1: Ceiling check ONLY before dispatching a new BUILD attempt
+            # Ceiling check ONLY before dispatching a new BUILD attempt
             if spec_wallclock_secs >= FOREMAN_SPEC_WALLCLOCK_CEILING:
                 halts = queue.park(task, "spec-wallclock-ceiling-exceeded",
                                    {"accumulated_secs": spec_wallclock_secs})
@@ -1081,7 +1081,7 @@ class BundleRunner:
                 return {"status": "parked", "park_reason": "spec-wallclock-ceiling-exceeded",
                         "failure_trail": {"accumulated_secs": spec_wallclock_secs}, "halts": halts}
 
-            # Fetch live origin/main HEAD (R4.AC2 -- never cached between attempts)
+            # Fetch live origin/main HEAD (never cached between attempts)
             base_sha = self._fetch_live_base_sha()
 
             branch = f"build/{run_id}/{slug}/{attempt}"
@@ -1110,7 +1110,7 @@ class BundleRunner:
             if build_result.commit_sha is None:
                 ec = build_result.error_class
                 if ec == "builder-wedged":
-                    # R2.AC2/AC6: the liveness watchdog killed a wedged / over-cap
+                    # the liveness watchdog killed a wedged / over-cap
                     # session. Record the trail (wedge duration, last output excerpt)
                     # and retry once under the existing budget; a second wedge parks
                     # with park_reason='builder-wedged'.
@@ -1251,7 +1251,7 @@ class BundleRunner:
             # Write-ahead: verifying (before verify dispatch)
             queue.advance(task, TaskStatus.VERIFYING, commit_sha=build_result.commit_sha)
 
-            # R1.AC1: NO ceiling check here. Once a build completes, verify runs
+            # NO ceiling check here. Once a build completes, verify runs
             # regardless of accumulated wall-clock. The ceiling only gates the
             # NEXT build attempt dispatch (top of the for loop).
 
@@ -1279,12 +1279,12 @@ class BundleRunner:
             spec_wallclock_secs += _verify_elapsed
 
             if verify_result.verdict == "PASS":
-                # H7 (R3.AC2a / R6.AC4): mechanical conformance gate. The
+                # H7: mechanical conformance gate. The
                 # deterministic subset of Checklists A (max-width/token-override/
                 # grid/density) and B (vendor-self-source ratio/uniform-value/
                 # sample-size) is a HARD gate here, not LLM inference. The cold
                 # verifier's checklist read above remains a semantic supplement.
-                # A FAIL routes to the standard R5 park/retry path (R6.AC4
+                # A FAIL routes to the standard R5 park/retry path (
                 # direct-push mode).
                 from scripts.foreman.conformance import format_conformance_findings
                 conf = self._check_conformance(base_sha, build_result.commit_sha, spec, run_id)
@@ -1452,7 +1452,7 @@ class BundleRunner:
 
                 # R2: fix-forward lane. When findings count <= threshold and a build
                 # commit exists, dispatch a fix pass instead of a rebuild.
-                # R1.AC3: fix passes are NOT blocked by wall-clock ceiling; check
+                # fix passes are NOT blocked by wall-clock ceiling; check
                 # fix-forward eligibility BEFORE the ceiling-exceeded-FAIL park.
                 findings_count = self._count_findings(verify_result.findings)
                 if (
@@ -1461,12 +1461,12 @@ class BundleRunner:
                     and last_build_branch is not None
                     and fix_budget_remaining > 0
                 ):
-                    # R2.AC1: fix pass; patch existing implementation, not rebuild.
+                    # fix pass; patch existing implementation, not rebuild.
                     fix_budget_remaining -= 1
                     prior_findings = verify_result.findings
                     # Transition back to building before fix pass dispatch (write-ahead).
                     queue.advance(task, TaskStatus.BUILDING, attempt_no=attempt)
-                    # R2.AC1: fix pass prompt instructs the builder to patch (not rebuild).
+                    # fix pass prompt instructs the builder to patch (not rebuild).
                     fix_prompt = render_build_prompt(
                         spec, run_id, last_build_branch, attempt, cfg.repo,
                         prior_findings=prior_findings,
@@ -1478,7 +1478,7 @@ class BundleRunner:
                                        "fix_budget_remaining": fix_budget_remaining})
                     _fix_t0 = time.monotonic()
                     fix_result = self._transport.build(fix_prompt, cfg.builder_model)
-                    # R1.AC3: fix passes are NOT gated by wall-clock ceiling; we do not
+                    # fix passes are NOT gated by wall-clock ceiling; we do not
                     # add elapsed to spec_wallclock_secs for ceiling-gating purposes.
                     _fix_elapsed = time.monotonic() - _fix_t0
 
@@ -1845,7 +1845,7 @@ class BundleRunner:
                                     prior_findings = fp2_vr.findings
                             # Budget exhausted or fix passes all failed; fall through to rebuild.
 
-                # R2.AC4 / R1.AC2: findings above threshold OR fix budget exhausted.
+                # findings above threshold OR fix budget exhausted.
                 # Check ceiling AFTER fix-forward eligibility: if ceiling
                 # exceeded, park ceiling-exceeded carrying findings; otherwise rebuild.
                 if spec_wallclock_secs >= FOREMAN_SPEC_WALLCLOCK_CEILING:

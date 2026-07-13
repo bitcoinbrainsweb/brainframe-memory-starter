@@ -116,7 +116,7 @@ def _apply_fixture(working_dir: Path, fixture_path: str):
     """Crash-safe: apply negative-control fixture JSON, always revert on exit.
 
     Fixture JSON format: {"target_file": "src/x.py", "content": "...broken..."}
-    NEVER commits — revert is guaranteed by try/finally.
+    NEVER commits -- revert is guaranteed by try/finally.
     """
     fixture_file = working_dir / fixture_path
     if not fixture_file.exists():
@@ -188,7 +188,7 @@ def _default_test_runner(test_file: str, test_fn: str, working_dir: Path) -> boo
 
 
 # ---------------------------------------------------------------------------
-# Coverage Method (R2)
+# Coverage Method
 # ---------------------------------------------------------------------------
 
 class CoverageMethod:
@@ -219,7 +219,7 @@ class CoverageMethod:
             tf = test.get("file", "")
             fn = test.get("fn", "")
 
-            # R2.AC3: per-test isolation
+            # per-test isolation
             lines_hit = self._coverage_runner(tf, fn, working_dir)
             if lines_hit == 0:
                 return MethodResult(
@@ -228,7 +228,7 @@ class CoverageMethod:
                     "coverage-zero-line-hit",
                 )
 
-            # R2.AC2: deletion-sensitivity check
+            # deletion-sensitivity check
             for code_path in code_paths:
                 if ":" not in code_path:
                     continue
@@ -250,7 +250,7 @@ class CoverageMethod:
 
 
 # ---------------------------------------------------------------------------
-# Mutation Method (R3)
+# Mutation Method
 # ---------------------------------------------------------------------------
 
 @dataclass
@@ -339,7 +339,7 @@ class MutationMethod:
 
 
 # ---------------------------------------------------------------------------
-# Negative Control Method (R4)
+# Negative Control Method
 # ---------------------------------------------------------------------------
 
 class NegativeControlMethod:
@@ -412,7 +412,7 @@ class CompositeMethod:
 
 
 # ---------------------------------------------------------------------------
-# Audit event — best-effort, never raises
+# Audit event -- best-effort, never raises
 # ---------------------------------------------------------------------------
 
 def _post_audit_event(payload: dict) -> None:
@@ -439,7 +439,7 @@ def _post_audit_event(payload: dict) -> None:
 
 
 # ---------------------------------------------------------------------------
-# LLM annotation — explanatory only, cannot overturn mechanical FAIL
+# LLM annotation -- explanatory only, cannot overturn mechanical FAIL
 # ---------------------------------------------------------------------------
 
 def _run_llm_annotation(
@@ -498,7 +498,7 @@ class SubstanceDiscriminator:
             code_paths: list[str] = entry.get("code_paths") or []
             fixture: str | None = entry.get("negative_control_fixture")
 
-            # R1.AC2 / R6.AC2: fail closed on zero changed lines
+            # fail closed on zero changed lines
             if not changed_lines:
                 mech = MethodResult("FAIL", {}, "zero-change-no-target")
             elif method_name == "coverage":
@@ -519,7 +519,7 @@ class SubstanceDiscriminator:
                     negative_control_fixture=fixture,
                 )
 
-            # R5.AC2: optional LLM annotation (explanatory only)
+            # optional LLM annotation (explanatory only)
             llm_findings = _run_llm_annotation(
                 criterion_id, method_name, mech, changed_lines, self._llm_caller
             )
@@ -549,7 +549,7 @@ class SubstanceDiscriminator:
             }
             per_criterion.append(cr)
 
-            # R6.AC3: audit (best-effort — never raises)
+            # audit (best-effort -- never raises)
             try:
                 self._audit_poster({
                     "run_id": run_id,

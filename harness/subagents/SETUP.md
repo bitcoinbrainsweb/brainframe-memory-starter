@@ -1,3 +1,6 @@
+> Status: runnable
+> `worker_pool.py` imports and runs entirely on the Python standard library, offline (verified here with a local fan-out), once you set the three budget env vars; no API keys or database are required and the ledger schema is optional.
+
 # Subagents system: SETUP
 
 ## What it does

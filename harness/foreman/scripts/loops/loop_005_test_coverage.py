@@ -19,10 +19,10 @@ _EXIT_ITERATION_RE = re.compile(
 )
 _PARTIAL_UNSUPPORTED_RE = re.compile(r"\bPARTIAL-UNSUPPORTED\s+reason=\"([^\"]*)\"")
 
-# Per R1.AC3: values >= 99.995% are treated as 100%
+# values >= 99.995% are treated as 100%
 _COVERAGE_ROUNDING_THRESHOLD = 99.995
 
-# R2.AC3: file skipped after this many consecutive zero-delta iterations
+# file skipped after this many consecutive zero-delta iterations
 _STALL_LIMIT = 2
 
 
@@ -30,7 +30,7 @@ def select_target_file(per_file: dict[str, int], stalled: set[str]) -> str | Non
     """Select file with maximum uncovered lines; tie-break by lexicographic path ascending.
 
     Excludes stalled files. Returns None when no eligible files remain.
-    R1.AC4: tie-break is lexicographic ascending (alphabetically earlier path wins).
+    tie-break is lexicographic ascending (alphabetically earlier path wins).
     """
     eligible = [(path, count) for path, count in per_file.items()
                 if count > 0 and path not in stalled]
@@ -143,9 +143,9 @@ def dispatch(
     attempt = 0
 
     while True:
-        # R3.AC1: ceiling check before each agent dispatch
+        # ceiling check before each agent dispatch
         if _clock() - start >= ceiling_secs:
-            _push(branch_name)  # R3.AC2: push before PARTIAL
+            _push(branch_name)  # push before PARTIAL
             return {
                 "status": "PARTIAL",
                 "reason": "ceiling: wall-clock budget exhausted",
@@ -179,7 +179,7 @@ def dispatch(
         # EXIT SUCCESS
         if _EXIT_SUCCESS_RE.search(raw_output):
             if before_coverage is None:
-                # R1.AC5: EXIT SUCCESS before any ITERATION_COMPLETE = no-op
+                # EXIT SUCCESS before any ITERATION_COMPLETE = no-op
                 return {
                     "status": "SUCCESS",
                     "no_op": True,
@@ -189,7 +189,7 @@ def dispatch(
                     "after_coverage": None,
                     "files_added": [],
                 }
-            # Genuine success: push then open PR (R4.AC3: push precedes open_pr)
+            # Genuine success: push then open PR (push precedes open_pr)
             _push(branch_name)
             _pr(
                 target_repo=target_repo,
@@ -250,7 +250,7 @@ def dispatch(
                 if stall_tracker.get(target_file, 0) >= _STALL_LIMIT:
                     stalled_files.add(target_file)
 
-                # R2.AC3: all remaining files stalled -- emit PARTIAL
+                # all remaining files stalled -- emit PARTIAL
                 if target_file in stalled_files and delta == 0.0:
                     return {
                         "status": "PARTIAL",

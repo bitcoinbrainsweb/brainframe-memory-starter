@@ -1,4 +1,4 @@
-"""BundleIntake: resolve spec bundle, topo-sort, commit task rows (R1, R10.AC1)."""
+"""BundleIntake: resolve spec bundle, topo-sort, commit task rows."""
 from __future__ import annotations
 
 from collections import defaultdict, deque
@@ -16,7 +16,7 @@ class BundleResolution:
 
 
 def _all_approved(spec: dict) -> bool:
-    """R1.AC1: all three approval booleans must be True."""
+    """all three approval booleans must be True."""
     return bool(
         spec.get("requirements_approved")
         and spec.get("design_approved")
@@ -25,7 +25,7 @@ def _all_approved(spec: dict) -> bool:
 
 
 def _validate_attestation(spec: dict) -> str | None:
-    """R1.AC4: spec must have independent=True XOR non-empty depends_on (not both, not neither).
+    """spec must have independent=True XOR non-empty depends_on (not both, not neither).
 
     Returns None if valid, error string if invalid.
     """
@@ -37,13 +37,13 @@ def _validate_attestation(spec: dict) -> str | None:
 
     if independent and has_depends:
         return (
-            "R1.AC4 attestation gate: has both independent=true and a non-empty "
+            "attestation gate: has both independent=true and a non-empty "
             "depends_on (XOR required). Remedy: set independent=false (keep "
             "depends_on) or clear depends_on (keep independent=true)."
         )
     if not independent and not has_depends:
         return (
-            "R1.AC4 attestation gate: has neither independent=true nor a non-empty "
+            "attestation gate: has neither independent=true nor a non-empty "
             "depends_on. Remedy: set independent=true (if the spec has no "
             "prerequisites) or populate depends_on with the slug(s) it requires."
         )
@@ -105,7 +105,7 @@ class BundleIntake:
         if not valid_specs:
             return BundleResolution(ordered=[], excluded=excluded)
 
-        # Kahn's topo-sort on depends_on graph (R1.AC2/AC3)
+        # Kahn's topo-sort on depends_on graph
         # Build adjacency and in-degree over valid specs only
         in_degree: dict[str, int] = {slug: 0 for slug in valid_specs}
         dependents: dict[str, list[str]] = defaultdict(list)

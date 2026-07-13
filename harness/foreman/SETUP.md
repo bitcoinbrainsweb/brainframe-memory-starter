@@ -1,3 +1,6 @@
+> Status: reference-only
+> The entrypoints `runner.py` and `bundle_runner.py` import internal sibling modules that were not extracted (the first failure is `ModuleNotFoundError: No module named 'scripts.foreman.ci_gate'`), so the code reads as production but will not boot as-is until you supply them; see What is stubbed below.
+
 # Foreman system: SETUP
 
 ## What it does
@@ -99,6 +102,24 @@ scripts/foreman/
 - Secrets travel only in memory and in request headers, never in argv and never in
   logs. The redaction helper in `agent_harness.py` scrubs credential-like prefixes
   from any error body before it is stored.
+
+## What is stubbed
+
+The shipped modules import these internal siblings, which were not extracted. Supply your own before the entrypoints will import and run:
+
+- `scripts.foreman.ci_gate` -- imported by runner.py, bundle_runner.py -- CI-gating state transitions
+- `scripts.foreman.heartbeat` -- imported by queue.py, bundle_runner.py -- per-task liveness heartbeat sink
+- `scripts.foreman.intake` -- imported by runner.py -- approval-flag check (`is_approved`)
+- `scripts.foreman.ledger` -- imported by bundle.py, bundle_runner.py, runner.py -- durable DB ledger backend
+- `scripts.foreman.transport` -- imported by bundle_runner.py, runner.py -- agent API tool-use transport
+- `scripts.foreman.antislop_lint` -- imported by bundle_runner.py -- output lint findings formatter
+- `scripts.foreman.manifest_lint` -- imported by bundle.py, bundle_runner.py -- spec body/self-containment lint
+- `scripts.foreman.conformance` -- imported by bundle_runner.py -- mechanical conformance checklist gate
+- `scripts.foreman.pty_harness` -- imported by bundle_runner.py -- wall-clock ceiling constant
+- `scripts.foreman.reconcile` -- imported by bundle_runner.py -- run reconciliation helper
+- `scripts.foreman.live_db_assert` -- imported by bundle_runner.py -- live database invariant assertion
+- `scripts.foreman.substance_delta` -- imported by bundle_runner.py -- substance-change delta computation
+- `scripts.foreman.worker_pool` -- imported by prompts.py -- fan-out worker pool (see the subagents system)
 
 ## What is intentionally not included
 

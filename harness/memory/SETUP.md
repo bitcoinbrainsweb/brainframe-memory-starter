@@ -1,3 +1,6 @@
+> Status: runnable with your inputs
+> This system ships a schema and an audit routine rather than a Python entrypoint; apply `SCHEMA.sql` to your own Postgres/Supabase and edit the example slugs to use it (SQL not boot-tested here, no local Postgres).
+
 # Memory system: SETUP
 
 ## What it does

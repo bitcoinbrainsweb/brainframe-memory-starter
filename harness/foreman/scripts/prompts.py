@@ -1,9 +1,9 @@
 """Prompt render seam for build and verify agents.
 
-R2.AC3: build prompts rendered via this function (not assembled ad hoc).
-R3.AC2: verify prompts include CI/inference separation.
+build prompts rendered via this function (not assembled ad hoc).
+verify prompts include CI/inference separation.
 R-MEM4.AC2: memory-discipline preamble injected at dispatch boundary by task classification.
-R4.AC2: trace boilerplate injected when TOOL_TRACE_ENABLED=true (uses restricted key, never service role key).
+trace boilerplate injected when TOOL_TRACE_ENABLED=true (uses restricted key, never service role key).
 """
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from scripts.foreman.models import BUILDER_MODEL, VERIFIER_MODEL
 from scripts.foreman.worker_pool import MEMORY_DISCIPLINE_PREAMBLE
 
 
-# R4.AC2: trace emission boilerplate injected into build prompts.
+# trace emission boilerplate injected into build prompts.
 # Uses TOOL_TRACE_INSERT_KEY (Phase A, insert-only restricted role) or
 # TOOL_TRACE_RELAY_URL + TOOL_TRACE_RELAY_KEY (Phase B, relay Edge Function).
 # The database service role key (SUPABASE_SERVICE_KEY) is NEVER referenced here.
@@ -239,7 +239,7 @@ def render_build_prompt(
         "",
     ]
 
-    # R4.AC2+R4.AC3: inject trace boilerplate when TOOL_TRACE_ENABLED=true; omit otherwise.
+    # inject trace boilerplate when TOOL_TRACE_ENABLED=true; omit otherwise.
     if os.environ.get("TOOL_TRACE_ENABLED", "true").lower() in ("true", "1"):
         lines += [
             _TOOL_TRACE_BOILERPLATE,
@@ -302,7 +302,7 @@ def render_loop_005_prompt(
 
     Each invocation produces one iteration prompt; Foreman re-dispatches until
     the loop terminates. Coverage format routing and commit message
-    format comply with the spec (R1.AC1, R1.AC2).
+    format comply with the spec.
     """
     target_repo = spec.get("target_repo", "")
     coverage_command = spec.get("coverage_command", "npm run coverage")
@@ -403,7 +403,7 @@ def render_loop_006_prompt(
     """Render a single-iteration agent prompt for Loop 006 (GEO/SEO Visibility).
 
     Each invocation produces one iteration prompt; Foreman re-dispatches until
-    the loop terminates. Stalled/skipped axes are excluded from SCORE (R3.AC2, R2.AC1).
+    the loop terminates. Stalled/skipped axes are excluded from SCORE.
     """
     target_repo = spec.get("target_repo", "")
     target_url = spec.get("target_url", "")
@@ -607,7 +607,7 @@ def render_verify_prompt(
         "- Read CI output; do not re-run tests yourself.",
         "- Flag test-coverage claims as unverified if no CI tooling is present for this repo.",
         "",
-        "## Conformance Checklists A/B (R3.AC2a) -- mechanical gate runs separately",
+        "## Conformance Checklists A/B -- mechanical gate runs separately",
         "",
         "A deterministic conformance gate runs mechanically in the verify phase and",
         "will independently FAIL this build on any violation of the following, so you",

@@ -1,3 +1,6 @@
+> Status: runnable with your inputs
+> The entrypoint `run_council.py` imports cleanly on the Python standard library alone (`httpx` and `jsonschema` are optional and imported lazily), but it needs your own model API keys to review anything; the `critique_runs` schema and telemetry are optional.
+
 # Council system: SETUP
 
 ## What it does

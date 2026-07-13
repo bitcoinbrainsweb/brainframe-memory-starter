@@ -1,4 +1,4 @@
-"""Ground-truth precondition gates for Phase 2 (R9.AC2, R9.AC3, R9.AC5).
+"""Ground-truth precondition gates for Phase 2.
 
 H-001: service-role credential NEVER appears in runner, agent context, or logs.
 SupabaseInvariantHarness uses anon key only; real credential wiring is Phase 3.
@@ -87,7 +87,7 @@ class SupabaseInvariantHarness:
 
 
 def verify_model_precondition(declared_model: str, api_key: str) -> PreconditionResult:
-    """R9.AC3: confirm declared_model is available in Anthropic /v1/models.
+    """confirm declared_model is available in Anthropic /v1/models.
 
     Fails closed on unreachable endpoint.
     Fails if declared model is absent regardless of what IS available (same-family
