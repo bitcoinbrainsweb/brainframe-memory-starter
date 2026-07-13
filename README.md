@@ -1,5 +1,21 @@
 # memory-starter
 
+This repo has two tiers.
+
+The original starter is the light version: a file-based memory system for Claude Code, plain markdown and skills, no database and no accounts. It installs in minutes and covers a single operator on a single machine. The harness/ tree is the full version: the database-backed systems for running AI agents against real work, where state must survive restarts, be queryable, and leave an audit trail. The light version is for trying the ideas; the full version is for depending on them.
+
+The harness ships five systems, each with real extracted code, its schema, and a SETUP.md stating what you must supply:
+
+- **memory**: an append-only event log with typed rules and a drift audit. Records what agents decided and changed, immutably, so current state is always reconstructable and auditable.
+- **sessions**: a session registry with handoff chains. Work survives chat and context boundaries: one session writes a brief and a pickup slug, the next claims it cold, and a collision guard stops two live sessions from working the same thread.
+- **foreman**: a build-verify-fix orchestrator. A queue and run ledger dispatch specs to a builder CLI; deterministic gates check the output. A manifest lint refuses structurally incomplete specs before any tokens are spent, a static lint rejects slop patterns in diffs, a substance gate fails changes that deliver scaffolding instead of the deliverable, a CI gate polls checks, and heartbeat plus reconcile catch runs that die mid-build. Each gate blocks a failure mode that judgment-based review lets through.
+- **council**: multi-model spec critique. Independent critics review a spec cold, in parallel and in sequence, judges consolidate, and a blinded reviewer audits the run itself. Catches the blind spots a single author or single model misses.
+- **subagents**: a bounded worker pool with a memory-budget cap and a fan-out ledger, for running many agent tasks concurrently without exhausting the host.
+
+Start with harness/quickstart. Four demos run the real code paths on local storage with canned model responses: no accounts, no keys, under five minutes. The per-system SETUP.md files are the real path and state exactly what each system needs: your own Postgres or Supabase, model API keys, and for foreman a builder CLI.
+
+---
+
 A lightweight AI memory system for Claude Projects. Fork this repo, run one script, paste instructions into Claude — done.
 
 **What you get:** Claude that remembers across sessions. Decisions logged. Notes searchable. Works with Claude Pro (web) or Claude Code (CLI).
