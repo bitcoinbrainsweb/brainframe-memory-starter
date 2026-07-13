@@ -1,0 +1,5 @@
+# Global memory-audit rules apply to every agent, regardless of project.
+# Empty by default: put only rules here that should hold everywhere.
+# Project-specific rules go in a per-project file (see example.yaml).
+protected_hashes: []
+rules: []

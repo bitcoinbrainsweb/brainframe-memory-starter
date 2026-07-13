@@ -1,0 +1,21 @@
+diff --git a/src/api/widgets_list.py b/src/api/widgets_list.py
+index 0000000..1111111 100644
+--- a/src/api/widgets_list.py
++++ b/src/api/widgets_list.py
+@@ -0,0 +1,7 @@
++def list_widgets(limit, cursor=None):
++    limit = min(int(limit), 100)
++    rows = db.query(widgets, after=cursor, limit=limit + 1)
++    page = rows[:limit]
++    has_more = len(rows) > limit
++    next_cursor = page[-1].id if has_more and page else None
++    return {"widgets": page, "next_cursor": next_cursor}
+diff --git a/tests/test_widgets_list.py b/tests/test_widgets_list.py
+index 0000000..2222222 100644
+--- a/tests/test_widgets_list.py
++++ b/tests/test_widgets_list.py
+@@ -0,0 +1,4 @@
++def test_caps_at_max_page_size():
++    out = list_widgets(limit=500)
++    assert len(out["widgets"]) <= 100
++    assert "next_cursor" in out

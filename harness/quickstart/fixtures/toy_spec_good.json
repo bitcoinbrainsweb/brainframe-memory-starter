@@ -1,0 +1,14 @@
+{
+  "_comment": "Toy spec that PASSES manifest_lint: hydrated body, parseable acceptance, and a scope boundary.",
+  "slug": "acme-widget-list-endpoint",
+  "body": "Implement GET /widgets returning a paginated list. Given a request with a limit query param, When the handler runs, Then it returns at most `limit` widgets plus a next cursor. Enforce a maximum page size of 100.",
+  "acceptance": [
+    "Returns at most limit widgets",
+    "Includes a next cursor when more rows remain",
+    "Rejects a limit above 100 with a 400"
+  ],
+  "scope": "src/api/widgets_list.py",
+  "requirements_approved": true,
+  "design_approved": true,
+  "tasks_approved": true
+}

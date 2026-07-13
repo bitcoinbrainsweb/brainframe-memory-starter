@@ -1,0 +1,10 @@
+diff --git a/src/api/widgets_delete.py b/src/api/widgets_delete.py
+index 0000000..3333333 100644
+--- a/src/api/widgets_delete.py
++++ b/src/api/widgets_delete.py
+@@ -0,0 +1,5 @@
++def delete_widget(widget_id):
++    # TODO: implement the actual delete
++    # placeholder implementation for now
++    # in a real system you would remove the row
++    pass
