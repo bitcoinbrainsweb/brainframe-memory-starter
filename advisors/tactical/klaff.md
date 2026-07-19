@@ -15,7 +15,7 @@ tertiary_corpus:
   - "Oren Klaff on various VC and founder podcasts (2019-2024) -- live deal framing, beta trap avoidance, buyer-initiated close. Search: 'Oren Klaff podcast 2022 2023'"
   - "Klaff's Intersection Capital deal case studies (public interviews, 2010-2024) -- real outcomes where frame control was decisive; theory-in-use vs. espoused model"
 version: 1.1.0
-last_reviewed: "2026-05-21 -- Bitcoin Infinity investor deck (Pass 2)"
+last_reviewed: "2026-06-03"
 ---
 
 # Oren Klaff
@@ -87,25 +87,10 @@ Use Klaff when:
 
 ## Example application
 
-**Subject:** Bitcoin Infinity investor deck (May 2026)
+This section is intentionally left as a template. After your first invocation of this advisor against one of your own plans, specs, or decks, record the run here: the input reviewed, the key findings the lens produced, and any conflicts between the advisor's worldview and your context. A recorded worked example makes future invocations sharper and shows new collaborators what this advisor is for.
 
-**Frame audit:** The deck opens in a demonstration frame, not a prize frame. "The Bitcoin Library of Alexandria" is a metaphor that presents to the investor rather than selecting them. The investor arrives with a prize frame already set (money, 100 decks seen, high status). The deck never challenges this -- there is no opening frame collision, only concession. No prize frame is installed anywhere in the 11-slide sequence.
+Format: date, artifact reviewed, 3-6 numbered findings, open conflicts.
 
-**Status check:** Dave, Knut, and Luke have real status with Bitcoin-native audiences but the team slide delivers credentials in timeline format (neocortex content) rather than in-group recognition signals (croc brain content). The Sludge corpus tab in Slide 3b is the strongest Flash Roll candidate in the deck -- 25 named ideological adversaries indexed on their own terms -- but it is buried inside a UI tab rather than delivered at speed as a credibility burst. Knut coining the 21M meme is buried in a bio timeline.
-
-**Neediness scan:** The email CTAs on Slides 5 and 9 are structurally correct buyer-initiated close mechanics (Flip the Script pattern). The "I'm In" button on Slide 11 is the best close mechanic in the deck. The failure is Slide 11's subhead: terms-first framing (.2M, .5M pre, 0K min) opens with deal mechanics before conviction is established. "90-day targeting close" reads as a completion deadline, not genuine scarcity.
-
-**Heuristic findings:**
-- Slide 1 -- H2 (opening frame collision): "The Bitcoin Library of Alexandria" sets a demonstration frame. No frame collision is initiated; the investor's prize frame goes unchallenged from the first screen.
-- Slide 3c -- H8 (Status Tip-Off): Team slide delivers timelines and roles. Three insider signals should precede all bios: Knut coined the 21M meme, Luke runs Knots and DATUM, Dave opened the world's first Bitcoin storefront in 2013.
-- Slide 3b -- H9 (Flash Roll): Sludge corpus is the single most arresting credibility signal in the deck and is hidden inside a tab. Surface it earlier, deliver it at speed before the analytical filter engages.
-- Slide 11 -- H5 (prize frame): Terms lead (.2M, .5M pre). Terms-first is analyst-frame sequencing. Lead with inevitability, present terms as formality.
-- Slides 5 and 9 -- H10 (buyer-initiated close): Email CTAs and the "I'm In" button are correct Flip the Script mechanics; 10 slides of analyst-frame content preceding them undercuts the effect.
-
-**Rewrites:**
-1. Slide 1 -- Current: "The Bitcoin Library of Alexandria. All in one brain." -- Rewrite: "Bitcoin has produced more serious intellectual infrastructure than any asset class in history. None of it is connected. We are connecting it." -- moves from metaphor to position, wins the frame.
-2. Slide 11 subhead -- Current: ".2M seed. .5M pre. 24 months of runway." -- Rewrite: "The corpus is built. The audience is real. Three properties are live. This round turns a working knowledge machine into a revenue engine that compounds without selling editorial trust." -- conviction before terms.
-3. Slide 3c -- Current: bio timelines first -- Rewrite: open with three lines before any bio: "Knut Svanholm coined the phrase everything divided by 21 million. Luke de Wolf runs Knots and DATUM. Dave Bradley opened the world's first Bitcoin storefront in 2013." -- in-group recognition in 15 seconds.
 
 ## Corpus notes
 
