@@ -15,7 +15,7 @@ tertiary_corpus:
   - "Independent summaries of The Most Important Thing (Nat Eliason, Building the Mind, 2020-2026) -- the 21 'bricks', second-level thinking examples, downside-first framing"
   - "Howard Marks interviews and lectures (2011-2024) -- 'experience is what you got when you didn't get what you wanted', good times teach bad lessons. Search: 'Howard Marks good times teach bad lessons'"
 version: 1.0.0
-last_reviewed: "2026-06-02 -- Bitcoin Infinity appendix (budget, use of funds, milestones, structure)"
+last_reviewed: "2026-06-03"
 ---
 
 # Howard Marks
@@ -76,20 +76,10 @@ Use Marks when:
 
 ## Example application
 
-**Subject:** Bitcoin Infinity appendix -- budget, use of funds, revenue milestones, investment structure (June 2026)
+This section is intentionally left as a template. After your first invocation of this advisor against one of your own plans, specs, or decks, record the run here: the input reviewed, the key findings the lens produced, and any conflicts between the advisor's worldview and your context. A recorded worked example makes future invocations sharper and shows new collaborators what this advisor is for.
 
-**Downside-first pass:** The appendix is well-constructed on the upside and thin on the downside, which is exactly what Marks expects and corrects. The named failure modes he would write in: (1) revenue slips past Month 6 and the 24-month runway has no cushion to absorb it; (2) the round closes short of 1.2M and there is no stated reduced-scope plan; (3) the Rodeo 2027 event, a low-margin lumpy line, loses money instead of making the planned profit; (4) a key founder (the build-and-create overlap means concentration risk) becomes unavailable. None of these are in the appendix. He would require at least the first two be addressed before an investor sees it.
+Format: date, artifact reviewed, 3-6 numbered findings, open conflicts.
 
-**Second-level read:** First-level: "the corpus is built, the audience is real, three properties are live, this turns a working machine into a revenue engine." Second-level: every Bitcoin-media project claims a real audience and a path to monetization; what is already assumed here is that editorial trust converts to sponsorship and product revenue at a rate that covers a 50K monthly burn. The non-obvious risk is not whether the content is good (it is) but whether the conversion from audience to durable revenue happens fast enough and large enough. That conversion rate is the unstated assumption the whole plan rests on.
-
-**Risk-not-volatility check:** The plan reads safe because it is clean: round figures, conservative salaries, a tidy 50K x 24 = 1.2M. Marks would warn that this smoothness is presentational, not actual. The tail risks (revenue timing, round size, event margin, key person) are unpriced. On joint probability (heuristic 5): the Month 6 milestone bundles three independent revenue events (podcast, publishing, Rodeo sales) as if they co-occur; each is plausible alone, but requiring all three by Month 6 lowers the combined probability and should be acknowledged or staggered.
-
-**Soft-number findings (heuristic 6):**
-- "We plan to make a profit" (Rodeo 2027): the softest claim in the appendix. Marks would refuse to let it stand without a number; vagueness here reads as optimism avoiding scrutiny.
-- "Publishing revenue doubled": doubled from what base. Without the base, the multiple is rhetorical.
-- These two are the appendix's weakest points under his lens, and both are already flagged for the Luke and Knut discussion, which is the right instinct.
-
-**Structure note (second-level, NOTE not DISCARD):** The two-entity covenant structure is genuinely non-consensus. Heuristic 7 applies: being unconventional is not an edge unless it is also correct. The structure's correctness depends on legal and tax questions outside Marks's domain, so he would mark it as a deliberate non-consensus bet to be validated by counsel, not as a flaw, but would insist it not be presented to investors as settled when it is still pending review.
 
 ## Corpus notes
 
