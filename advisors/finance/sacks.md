@@ -14,7 +14,7 @@ tertiary_corpus:
   - "Independent burn-multiple explainers and calculators (Wall Street Prep, CFI, Kruze, 2022-2025) -- consistent third-party formalization of Sacks's definition and benchmarks"
   - "Allen Miller (Oak HC/FT) and Versatile VC capital-efficiency benchmark sets -- alternative efficiency benchmarks that corroborate the burn-multiple framing. Search: 'capital efficiency benchmarks 0 to 100M ARR'"
 version: 1.0.0
-last_reviewed: "2026-06-02 -- Bitcoin Infinity appendix (budget, use of funds, milestones)"
+last_reviewed: "2026-06-03"
 ---
 
 # David Sacks
@@ -72,19 +72,10 @@ Use Sacks when:
 
 ## Example application
 
-**Subject:** Bitcoin Infinity appendix -- budget, use of funds, revenue milestones (June 2026)
+This section is intentionally left as a template. After your first invocation of this advisor against one of your own plans, specs, or decks, record the run here: the input reviewed, the key findings the lens produced, and any conflicts between the advisor's worldview and your context. A recorded worked example makes future invocations sharper and shows new collaborators what this advisor is for.
 
-**Efficiency framing:** The burn multiple cannot be computed here because the plan assumes zero revenue for 24 months by design, and the metric requires net new revenue in the denominator. By Sacks's own logic (heuristic 7) this makes the revenue-start date the single most important number in the appendix. The Month 6 milestones are therefore not a mid-deck detail; they are the moment efficiency becomes measurable, and should be the spine of the milestones page. The business is also not SaaS: podcast sponsorship, book sales, and event revenue are repeatable but not ARR, so any efficiency framing must use an honest "repeatable revenue" denominator (heuristic 5), not pretend these are subscriptions.
+Format: date, artifact reviewed, 3-6 numbered findings, open conflicts.
 
-**Hype-ratio check:** The appendix is well-behaved here. It does not lead with the size of the raise as a proof point; the 1.2M is sized to milestones, and the use-of-funds page shows where money converts to capability. The one place the hype ratio could creep in: "publishing revenue doubled" advertises a multiple without a base, which is input-flavored language. State the base.
-
-**Cause-not-symptom diagnosis:** Because there is no revenue for two years, the structural efficiency lever Sacks would focus on is gross margin on the eventual revenue lines. Podcast sponsorship and digital content carry high gross margin; live events (Rodeo) carry low and lumpy margin with real downside. He would want the milestones to weight toward the high-margin lines first (podcast, publishing) and treat Rodeo profit as the riskier, lower-margin commitment, which matches how the appendix is already sequenced. He would press for the Rodeo profit number specifically, since an event with an undefined margin is exactly the kind of line that quietly wrecks an efficiency ratio.
-
-**Heuristic findings:**
-- Milestones -- H7 (revenue-start date is critical): correct that revenue starts at Month 6; foreground it as the de-risking moment, not a list item. Strong.
-- Use of funds -- H2 (hype ratio): does not oversell the raise; passes. "Doubled" without a base is the lone input-flavored phrase.
-- Milestones -- H5 (honest denominator): the three revenue lines are repeatable but not ARR; never frame them as recurring without the distinction.
-- Budget -- H4 (cause not symptom): the lean team is good hygiene but is not the efficiency lever; gross margin on the revenue lines is. Rodeo's margin is the exposure.
 
 ## Corpus notes
 
