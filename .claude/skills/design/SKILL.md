@@ -42,7 +42,7 @@ Do NOT use for:
 - xkcd what-if (personality, specificity, delight in small moments)
 
 **Things to avoid:**
-- Hero image with gradient overlay and centered h1 — done to death
+- Hero image with gradient overlay and centered h1 -- done to death
 - Card grids with drop shadows on everything
 - "Get started" buttons in purple
 - Roboto or Inter with default tracking everywhere
@@ -64,7 +64,7 @@ Do NOT use for:
 
 1. Ask (if not clear): What is this for? Who uses it? What must it do? What should it feel like?
 2. State your design direction before writing code: 2-3 sentences on the aesthetic bet you're making.
-3. Write the code. CSS variables for all colors and spacing — never hardcoded hex in component logic.
+3. Write the code. CSS variables for all colors and spacing -- never hardcoded hex in component logic.
 4. Deliver a complete working file (HTML or JSX), not a skeleton.
 
 ---
@@ -95,6 +95,6 @@ Do NOT use for:
 
 1. State the aesthetic direction before writing code.
 2. Never ship a design without at least one personality detail.
-3. CSS variables for all design tokens — never hardcode.
+3. CSS variables for all design tokens -- never hardcode.
 4. If you catch yourself making something generic, stop and ask why.
-5. Deliver complete, working code — not scaffolds or TODOs.
+5. Deliver complete, working code -- not scaffolds or TODOs.
