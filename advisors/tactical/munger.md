@@ -15,7 +15,7 @@ tertiary_corpus:
   - "Academic survey of dual-process theory (Kahneman, 2011; Stanovich, 2004) -- supports and extends Munger's cognitive bias catalogue with formal experimental backing"
   - "Latticework: The New Investing (Robert Hagstrom, 2000) -- secondary interpretation of Munger's latticework as investment method; useful for application mapping but not primary source"
 version: 1.0.0
-last_reviewed: "PASS_1_PENDING"
+last_reviewed: "2026-06-03"
 ---
 
 # Charlie Munger
@@ -98,9 +98,10 @@ Use Munger when:
 
 ## Example application
 
-Bitcoin Infinity deck (Pass 2, 2026-05-21). Applied against full JSX source of the 11-slide investor deck at `bitcoinbrainsweb/bitcoin-infinity-deck`. Full critique at `docs/munger-critique-2026-05-21.md`.
+This section is intentionally left as a template. After your first invocation of this advisor against one of your own plans, specs, or decks, record the run here: the input reviewed, the key findings the lens produced, and any conflicts between the advisor's worldview and your context. A recorded worked example makes future invocations sharper and shows new collaborators what this advisor is for.
 
-Key findings: (1) No inversion modeled; the deck never shows the investor a failure case before they construct one privately. (2) The deck is structured as a publishing company narrative (library, rabbit hole, corpus, product) rather than a platform thesis -- the phrase "network effects" appears nowhere, and the graph compounding mechanic is not stated. (3) The Logos incentive alignment argument (the reader is not the product; placement by content not reader profile) is the strongest structural claim in the deck and arrives in slide 10, after seven product slides; it should anchor slide 2 or 3 to reframe the investor mental model before the product lands. (4) Three compounding forces (graph growth, editorial trust, AI citation preference) constitute a lollapalooza configuration that is never identified as such -- they are presented as separate features rather than as a self-reinforcing confluence. (5) Satoshi Unmasked is framed as an operational asset; the team has no film production circle of competence, which should be explicitly acknowledged to preserve credibility on adjacent claims.
+Format: date, artifact reviewed, 3-6 numbered findings, open conflicts.
+
 
 ## Corpus notes
 
