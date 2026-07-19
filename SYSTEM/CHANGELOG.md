@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.2.1 -- 2026-07-19
+
+- Sanitization pass: advisor Example application sections replaced with generic templates (internal strategy content removed)
+- Em-dash style ban enforced repo-wide (double hyphen convention)
+- Internal project reference removed from foreman conformance docstring
+- Sanitization verified by full-tree read-back scan
+
 ## v1.2.0 -- 2026-06-15
 
 Consolidation and rule-hardening pass. Backward compatible (older forks keep working via redirect stubs).
