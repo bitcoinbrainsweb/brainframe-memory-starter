@@ -7,13 +7,13 @@ description: >-
 version: 1.0.0
 ---
 
-# Pickup — Resume From Handchat
+# Pickup -- Resume From Handchat
 
 Trigger: `pickup` + any words. Fuzzy match always.
 
 ---
 
-## Step 1 — Find the handchat entry
+## Step 1 -- Find the handchat entry
 
 Scan `USER/routing/sessions.md` (and project sessions files if a project is active) for a `HANDCHAT:` entry matching the slug words.
 
@@ -43,7 +43,7 @@ Read the sessions.md content from context (fetched at boot). Find HANDCHAT entri
 
 ---
 
-## Step 2 — Fuzzy match
+## Step 2 -- Fuzzy match
 
 Join slug words with `-` and find the entry whose slug contains those words. If multiple match, list them and ask user which. If one matches, proceed.
 
@@ -51,25 +51,25 @@ If no match: list all HANDCHAT entries from sessions.md and ask user to pick.
 
 ---
 
-## Step 3 — Surface and execute
+## Step 3 -- Surface and execute
 
 Print:
 ```
 Picking up: {slug}
 
-{context_brief — mental model section}
+{context_brief -- mental model section}
 
 Last: {last action from next_action}
 Next: {pick up here from next_action}
 ```
 
-Then **immediately execute** "pick up here" — no confirmation, no preamble.
+Then **immediately execute** "pick up here" -- no confirmation, no preamble.
 
 ---
 
 ## Rules
 
-1. Fuzzy match always — "pickup api rate thing" works fine.
+1. Fuzzy match always -- "pickup api rate thing" works fine.
 2. Execute immediately after surfacing context.
 3. Never say "shall I proceed."
 4. If no match: list recent HANDCHAT entries, never just say "not found."
