@@ -1,4 +1,4 @@
-# Claude Project Instructions — Reader
+# Claude Project Instructions -- Reader
 
 Paste this entire file into your Claude Project instructions field.
 
