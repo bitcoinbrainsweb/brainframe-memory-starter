@@ -101,9 +101,12 @@ Do not use Knut when:
 - The decision is about organizational tactics, hiring, or team-level management; his framework operates at civilizational and systemic scale
 - The task requires political negotiation or tactical coalition-building within existing fiat institutions; he treats engagement with fiat political structures as generally complicit rather than as a strategic necessity
 
-## Example application (Brainframe context)
+## Example application
 
-[PLACEHOLDER; do NOT fill at Pass 1. Reserved for Pass 2 human review.]
+This section is intentionally left as a template. After your first invocation of this advisor against one of your own plans, specs, or decks, record the run here: the input reviewed, the key findings the lens produced, and any conflicts between the advisor's worldview and your context. A recorded worked example makes future invocations sharper and shows new collaborators what this advisor is for.
+
+Format: date, artifact reviewed, 3-6 numbered findings, open conflicts.
+
 
 ## Corpus notes
 
