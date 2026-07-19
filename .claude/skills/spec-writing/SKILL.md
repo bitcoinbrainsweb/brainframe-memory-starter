@@ -36,13 +36,13 @@ Default to Full unless the idea is clearly early-stage.
 
 ---
 
-## Step 1 — Existence check
+## Step 1 -- Existence check
 
 Before writing, ask: does a spec for this already exist? Check `USER/routing/{project}/facts.md` and `USER/topics/` for any matching entry. If found, surface it and ask whether to extend or replace.
 
 ---
 
-## Step 2 — Draft
+## Step 2 -- Draft
 
 **Header:**
 ```
@@ -80,7 +80,7 @@ R2. WHEN a spec already exists for the topic, the system SHALL surface it before
 
 ---
 
-## Step 3 — Save
+## Step 3 -- Save
 
 Save to `USER/topics/{slug}.md`.
 
@@ -106,7 +106,7 @@ Produce the full spec as markdown for the user to save to `USER/topics/{slug}.md
 
 ---
 
-## Step 4 — ADR tier routing
+## Step 4 -- ADR tier routing
 
 If the spec represents an irreversible architectural choice (data model, auth approach, external dependency, storage format), flag it:
 
@@ -121,7 +121,7 @@ Ask user to confirm before proceeding to ACTIVE status.
 
 ## Rules
 
-1. Requirement IDs are stable — never renumber after assignment.
+1. Requirement IDs are stable -- never renumber after assignment.
 2. Status progresses: DRAFT → ACTIVE → SUPERSEDED. Never skip DRAFT.
 3. One spec per file, one file per spec.
-4. Stubs are valid deliverables — not every spec needs to be full before being useful.
+4. Stubs are valid deliverables -- not every spec needs to be full before being useful.
