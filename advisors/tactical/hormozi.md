@@ -15,7 +15,7 @@ tertiary_corpus:
   - "Alex Hormozi on Diary of a CEO with Steven Bartlett (2023-2024) -- long-form deal structure, pricing logic, acquisition philosophy"
   - "Alex Hormozi on My First Million (Sam Parr / Shaan Puri, multiple episodes 2021-2025) -- deal terms, operator mindset, real business tradeoffs"
   - "GymLaunch origin story interviews -- multiple podcasts 2019-2022; documents how Grand Slam Offer framework was derived from gym licensing failures and wins"
-last_reviewed: "[PLACEHOLDER -- Dave to complete]"
+last_reviewed: "2026-06-03"
 ---
 
 # Alex Hormozi
