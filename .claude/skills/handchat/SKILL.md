@@ -7,7 +7,7 @@ description: >-
 version: 1.0.0
 ---
 
-# Handchat — Mid-Session Pause
+# Handchat -- Mid-Session Pause
 
 Time budget: under 60 seconds. One file write. No session close.
 
@@ -15,13 +15,13 @@ Time budget: under 60 seconds. One file write. No session close.
 
 ## What this is NOT
 
-- Not a session close — run quitchat for that
+- Not a session close -- run quitchat for that
 - Not a memory audit
 - Not a deliverable scan
 
 ---
 
-## Step 1 — Derive pickup slug
+## Step 1 -- Derive pickup slug
 
 2-4 word kebab-case slug describing what is being worked on.
 
@@ -34,21 +34,21 @@ Examples: `api-rate-limit-fix`, `onboarding-flow-redesign`, `q3-pricing-decision
 
 ---
 
-## Step 2 — Write context brief
+## Step 2 -- Write context brief
 
 Two fields:
 
 **next_action** (what to do first in new chat, under 300 chars):
 ```
-Last: {one sentence — what just finished}
-Pick up: {one sentence — exactly what to do first}
-Do not redo: {comma-separated — things already done}
+Last: {one sentence -- what just finished}
+Pick up: {one sentence -- exactly what to do first}
+Do not redo: {comma-separated -- things already done}
 ```
 
 **context_brief** (intelligence for new chat):
 ```
 ## Mental model
-{Current understanding — what we know, what frame we are in}
+{Current understanding -- what we know, what frame we are in}
 
 ## Decisions made
 - {Decision}: {why}
@@ -64,13 +64,13 @@ Be generous. The new chat reads this and becomes as capable as this chat.
 
 ---
 
-## Step 3 — Write to sessions.md
+## Step 3 -- Write to sessions.md
 
 Detect active project. Write to `USER/routing/{project}/sessions.md` or `USER/routing/sessions.md`.
 
 Append a handchat entry:
 ```
-### {YYYY-MM-DD} — HANDCHAT: {slug}
+### {YYYY-MM-DD} -- HANDCHAT: {slug}
 **next_action:** {next_action}
 **context_brief:**
 {context_brief}
@@ -93,7 +93,7 @@ SHA=$(echo "$RESPONSE" | python3 -c "import sys,json; print(json.load(sys.stdin)
 # Append handchat entry to current content
 UPDATED="${CURRENT}
 
-### {YYYY-MM-DD} — HANDCHAT: {slug}
+### {YYYY-MM-DD} -- HANDCHAT: {slug}
 **next_action:** {next_action}
 **context_brief:**
 {context_brief}
@@ -113,11 +113,11 @@ Produce the handchat entry block for the user to paste into the sessions file. D
 
 ---
 
-## Step 4 — Surface
+## Step 4 -- Surface
 
 Print:
 ```
-handchat saved — pickup slug: {slug}
+handchat saved -- pickup slug: {slug}
 
 Rename this chat: {slug} handoff
 Start new chat and type: pickup {slug}
