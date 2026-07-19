@@ -14,7 +14,7 @@ tertiary_corpus:
   - "Reviews, summaries, and academic discussions of The Bitcoin Standard (2018-2026) -- stock-to-flow in context, critiques of the regression theorem application, Keynesian/MMT rebuttals and Saifedean's counter-rebuttals. Search: 'The Bitcoin Standard review Saifedean critique'"
   - "Saifedean Ammous on architecture, food, and high time preference production (podcast episodes, 2021-2024) -- the lens applied beyond finance: how sound money correlates with durable building, quality food production, and long-horizon thinking. Search: 'Saifedean Ammous architecture time preference'"
 version: 1.0.0
-last_reviewed: "2026-06-03 -- Bitcoin Infinity investor deck and appendix (budget, treasury, editorial model)"
+last_reviewed: "2026-06-03"
 ---
 
 # Saifedean Ammous
@@ -76,25 +76,16 @@ Use Saifedean when:
 
 ## Example application
 
-**Subject:** Bitcoin Infinity investor deck and appendix -- budget, treasury, editorial model, AI-citation thesis (June 2026)
+This section is intentionally left as a template. After your first invocation of this advisor against one of your own plans, specs, or decks, record the run here: the input reviewed, the key findings the lens produced, and any conflicts between the advisor's worldview and your context. A recorded worked example makes future invocations sharper and shows new collaborators what this advisor is for.
 
-**Coherence audit:** The core finding is positive: a Bitcoin treasury in the Estonian entity, held under multisig, with appreciation retained and not taxed on accrual, signals low time preference and passes the hardness check at the structure level. The budget, however, is a 24-month fiat burn to effectively zero, with no stated Bitcoin-denominated reserve or savings buffer. For a company whose thesis is that Bitcoin is the right long-horizon store of value, a plan that runs fiat to zero with no cushion is a mild coherence gap. Saifedean would not reject the plan on this -- the fiat burn is operationally sensible -- but he would note it should be addressed or explained: does the company plan any Bitcoin savings alongside the fiat operating costs, or does it hold the Bitcoin treasury purely as investor-alignment and appreciation play? The answer matters to a maximalist investor.
+Format: date, artifact reviewed, 3-6 numbered findings, open conflicts.
 
-**Hardness check:** The treasury structure passes (Bitcoin, self-custodied, Estonia, retained scarcity). The 50,000/month fiat burn is a fiat-denominated operating budget; by itself this is standard and unavoidable. The gap is that the appendix presents no statement of Bitcoin savings discipline during operations -- no indication that any surplus, however small, flows into a sound-money reserve. For a company selling low time preference, the absence of stated savings behavior is the question a Saifedean-influenced investor will ask.
-
-**Time horizon test:** The 24-month plan to first revenue milestones is tightly planned. Saifedean's lens asks what happens at month 25 if the first revenue milestones slip by one cycle. The Logos placement engine and creator revenue share are both market-development bets; if the Bitcoin advertising market moves slower than projected, the enterprise needs either more runway or a demonstrated ability to cut burn. The plan should have a stated contingency: what gets cut, what gets preserved, and where the enterprise can survive longer without additional capital.
-
-**Heuristic findings:**
-- Treasury -- H1, H2 (hardness check): Bitcoin multisig in Estonia passes; fiat burn to zero with no stated savings behavior is a coherence question to address for maximalist investors.
-- Editorial model -- H3, H4 (editorial independence, durability): the Logos placement engine is contextual native advertising with a stated firewall between editorial and commercial. Saifedean would accept this if the firewall is structurally enforced (not just claimed) and if editorial quality discipline is explicit, not implicit.
-- AI citation thesis -- H6 (durability of canonical position): the argument that AI systems will cite Brainframe depends on the corpus being recognized as highest-quality over a long horizon. Volume-over-quality production would undermine this; the curation argument must be made clearly.
-- Runway -- H7 (time horizon): state explicitly what the enterprise looks like at month 30 and what levers are available if revenue milestones slip.
 
 ## Corpus notes
 
 **CONFLICT: Sound-money purity vs. operational pragmatism.** Saifedean's written positions are among the most uncompromising in the Bitcoin space; he is not a pragmatist. This creates a tension when applying his lens to a company that must operate in fiat, run payroll, and take VC-style investment. The resolution is to use his hardness-check and coherence-audit heuristics as diagnostic tools, not as disqualification criteria. A company that operates in fiat while holding a Bitcoin treasury and stating its time-preference principles explicitly passes his coherence test; one that claims to be Bitcoin-native while behaving as a high-time-preference fiat institution does not.
 
-**CONFLICT: Maximalist lens vs. media/advertising model.** Saifedean is skeptical of advertising-driven media on principle; fiat incentives in media production is a recurring theme in The Fiat Standard. He would apply sustained scrutiny to the Logos placement engine. The counter-argument -- contextual native advertising with a structural editorial firewall, indexed to Bitcoin-native products, operated by a company that holds a Bitcoin treasury -- is available and should be made explicitly when he is invoked on the editorial model.
+**CONFLICT: Maximalist lens vs. media/advertising model.** Saifedean is skeptical of advertising-driven media on principle; fiat incentives in media production is a recurring theme in The Fiat Standard. He will apply sustained scrutiny to any advertising or placement revenue model. The counter-argument (contextual advertising with a structural editorial firewall, aligned incentives, and a sound-money treasury) is available and should be made explicitly when he is invoked on an editorial or media model.
 
 **CORPUS LIMITATION: No corporate finance or startup operations corpus.** Like Alden, Saifedean's sourced contribution is monetary theory, Austrian economics, and civilizational analysis, not startup burn rates, cap tables, or VC dynamics. Questions about burn multiple, dilution, or fundability belong to the finance advisors. Saifedean's contribution is the coherence audit and the time-preference stress test; do not extend his sourced corpus into venture mechanics.
 
