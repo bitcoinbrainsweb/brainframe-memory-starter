@@ -7,24 +7,24 @@ description: >-
 version: 1.0.0
 ---
 
-# ADR — Architecture Decision Record
+# ADR -- Architecture Decision Record
 
 Append-only. Never edits or removes existing entries.
 
 ---
 
-## Step 1 — Extract fields
+## Step 1 -- Extract fields
 
 From context, identify:
-- `{DECISION}` — one sentence: what was decided
-- `{RATIONALE}` — one sentence: why this over alternatives
-- `{STATUS}` — CONFIRMED, PROVISIONAL, or SUPERSEDED
+- `{DECISION}` -- one sentence: what was decided
+- `{RATIONALE}` -- one sentence: why this over alternatives
+- `{STATUS}` -- CONFIRMED, PROVISIONAL, or SUPERSEDED
 
 If status is unclear, default to CONFIRMED. If superseding a prior decision, ask which one and mark that entry SUPERSEDED in the same write.
 
 ---
 
-## Step 2 — Write to decisions.md
+## Step 2 -- Write to decisions.md
 
 Append to `USER/routing/decisions.md` (or `USER/routing/{project}/decisions.md` if a project is active).
 
@@ -73,7 +73,7 @@ Produce the entry block for the user to paste into decisions.md. Do not attempt 
 
 ---
 
-## Step 3 — Confirm
+## Step 3 -- Confirm
 
 Print:
 ```
@@ -86,7 +86,7 @@ Written to: {FILE_PATH}
 
 ## Rules
 
-1. Never edit existing entries — append only.
+1. Never edit existing entries -- append only.
 2. Status defaults to CONFIRMED if not stated.
-3. SUPERSEDED entries are flagged by appending `superseded_by: {new_decision_slug}` — never deleted.
-4. One entry per decision — do not batch multiple decisions into one entry.
+3. SUPERSEDED entries are flagged by appending `superseded_by: {new_decision_slug}` -- never deleted.
+4. One entry per decision -- do not batch multiple decisions into one entry.
