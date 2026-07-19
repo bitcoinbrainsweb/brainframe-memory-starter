@@ -1,4 +1,4 @@
-# Preferences — {project-name}
+# Preferences -- {project-name}
 
 **Class:** MUTABLE
 **Writer:** `quitchat` skill (end-of-session confirmation)
