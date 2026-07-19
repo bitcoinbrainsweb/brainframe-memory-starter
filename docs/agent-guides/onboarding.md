@@ -41,9 +41,9 @@ If the auto-migration fails (some Supabase plans restrict it), follow the manual
 ### Step 5: Customize your USER/ files
 
 Edit:
-- `USER/routing/facts.md` — replace `{YOUR_NAME}` etc. with your actual values
-- `USER/routing/preferences.md` — adjust to your communication style
-- `USER/people.md` — add collaborators, clients, contacts
+- `USER/routing/facts.md` -- replace `{YOUR_NAME}` etc. with your actual values
+- `USER/routing/preferences.md` -- adjust to your communication style
+- `USER/people.md` -- add collaborators, clients, contacts
 
 ### Step 6: Paste project instructions into Claude
 
