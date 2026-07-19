@@ -61,7 +61,7 @@ source ~/.config/memory-starter/.env
 # ANTHROPIC_API_KEY, OPENAI_API_KEY, PERPLEXITY_API_KEY
 ```
 
-**Minimum viable council (1 key — Anthropic only):**
+**Minimum viable council (1 key -- Anthropic only):**
 
 Run 3 separate prompts against claude-sonnet with varied critic personas:
 
@@ -124,6 +124,6 @@ After all critics have run, produce:
 ## Rules
 
 1. Minimum 2 critic passes before synthesis. 1 pass is not a council.
-2. Verdict is mandatory — do not end with "it depends."
+2. Verdict is mandatory -- do not end with "it depends."
 3. ACCEPT means proceed as-is. REVISE means fix specific items before proceeding. REWORK means fundamental issues.
-4. Unresolved risks survive the council — do not paper over genuine uncertainty with a confident verdict.
+4. Unresolved risks survive the council -- do not paper over genuine uncertainty with a confident verdict.
