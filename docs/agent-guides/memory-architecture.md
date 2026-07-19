@@ -2,10 +2,10 @@
 
 Four tiers. Each fetched differently.
 
-## T1 — Per-turn ambient (always present)
+## T1 -- Per-turn ambient (always present)
 Your Claude Project instructions + this CLAUDE.md + anything you upload in the current turn. No fetching required. Claude has this at all times.
 
-## T2 — Per-session fetched (fetched at boot)
+## T2 -- Per-session fetched (fetched at boot)
 Files Claude fetches at the start of every session from your GitHub repo:
 - SYSTEM/GLOBAL_RULES.md
 - USER/routing/facts.md
@@ -14,7 +14,7 @@ Files Claude fetches at the start of every session from your GitHub repo:
 
 These give Claude your universal context without you having to re-explain it.
 
-## T3 — On-demand fetched (fetched when needed)
+## T3 -- On-demand fetched (fetched when needed)
 Files Claude fetches when you ask about a specific topic, decision, or spec:
 - USER/topics/{slug}/decisions.md
 - USER/topics/{slug}/notes.md
@@ -22,7 +22,7 @@ Files Claude fetches when you ask about a specific topic, decision, or spec:
 
 Claude fetches these mid-session when relevant, not at boot.
 
-## T4 — Queryable (Supabase)
+## T4 -- Queryable (Supabase)
 Your Supabase project. Tables: decisions, specs, roadmap_items, topics, people, contributions, audit_log.
 
 Claude queries these when you ask it to recall, search, or find something across all your topics.
