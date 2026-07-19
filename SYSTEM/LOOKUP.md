@@ -1,4 +1,4 @@
-# LOOKUP — Routers
+# LOOKUP -- Routers
 
 Tells Claude where to look for specific content. Keep this file tight.
 
@@ -7,17 +7,17 @@ Tells Claude where to look for specific content. Keep this file tight.
 ## On session start
 
 Always fetch:
-- `SYSTEM/GLOBAL_RULES.md` — universal rules
-- `USER/routing/PROJECTS.md` — your list of registered projects
-- `USER/people.md` — collaborators, clients, contacts
+- `SYSTEM/GLOBAL_RULES.md` -- universal rules
+- `USER/routing/PROJECTS.md` -- your list of registered projects
+- `USER/people.md` -- collaborators, clients, contacts
 
 ## On detecting an active project
 
 When the user mentions a project by name (matching an entry in `PROJECTS.md`), fetch from `USER/routing/{project}/`:
-- `facts.md` — IMMUTABLE per-project facts
-- `preferences.md` — MUTABLE per-project preferences
-- `decisions.md` — APPEND-ONLY decision log
-- `sessions.md` — ROLLING session summaries
+- `facts.md` -- IMMUTABLE per-project facts
+- `preferences.md` -- MUTABLE per-project preferences
+- `decisions.md` -- APPEND-ONLY decision log
+- `sessions.md` -- ROLLING session summaries
 
 ## On project switch mid-chat
 
