@@ -16,7 +16,7 @@ Start with harness/quickstart. Four demos run the real code paths on local stora
 
 ---
 
-A lightweight AI memory system for Claude Projects. Fork this repo, run one script, paste instructions into Claude — done.
+A lightweight AI memory system for Claude Projects. Fork this repo, run one script, paste instructions into Claude -- done.
 
 **What you get:** Claude that remembers across sessions. Decisions logged. Notes searchable. Works with Claude Pro (web) or Claude Code (CLI).
 
@@ -39,7 +39,7 @@ Full guide: [docs/agent-guides/onboarding.md](docs/agent-guides/onboarding.md)
 ## File Layout
 
 ```
-CLAUDE.md                           Boot file — paste into Claude Project instructions
+CLAUDE.md                           Boot file -- paste into Claude Project instructions
 SYSTEM/                             Template-managed. Never edit manually.
   GLOBAL_RULES.md                   Claude's universal rules
   PROJECT_INSTRUCTIONS_OWNER.md     Paste into your Claude Project
@@ -53,14 +53,14 @@ USER/                               Yours. Customize freely. Never overwritten b
     sessions.md                     Rolling last-5 session summaries
   people.md                         Collaborators, clients, contacts
   topics/                           Per-topic folders
-contributions/                      Inbox — contributors write here, owner promotes
+contributions/                      Inbox -- contributors write here, owner promotes
 .claude/
   settings.json                     Claude Code deny rules (Claude Code users only)
   skills/                           Skill stubs
 scripts/
   onboard.sh                        One-command setup
   migrations/
-    001-initial-schema.sql          Supabase schema — idempotent
+    001-initial-schema.sql          Supabase schema -- idempotent
 docs/
   agent-guides/
     memory-architecture.md
@@ -109,4 +109,4 @@ claude.ai Projects (web/mobile): Claude produces SQL or curl commands for you to
 
 ---
 
-A lightweight memory architecture for Claude — battle-tested patterns, open for anyone to use.
+A lightweight memory architecture for Claude -- battle-tested patterns, open for anyone to use.
