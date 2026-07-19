@@ -1,4 +1,4 @@
-# Claude Project Instructions — Contributor
+# Claude Project Instructions -- Contributor
 
 Paste this entire file into your Claude Project instructions field.
 
