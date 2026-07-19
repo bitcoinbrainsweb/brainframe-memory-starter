@@ -48,11 +48,11 @@ After answers, generate 2-3 distinct approaches. For each:
 
 Format:
 ```
-**Option A — {Name}**
+**Option A -- {Name}**
 Bet: {what this approach assumes to be true}
 Tradeoff: {what you give up}
 
-**Option B — {Name}**
+**Option B -- {Name}**
 Bet: {what this approach assumes to be true}
 Tradeoff: {what you give up}
 ```
@@ -77,13 +77,13 @@ When the user converges on an approach and can articulate why, offer to hand off
 Ready to spec this? I can write a formal spec now.
 ```
 
-Do not write the spec inside brainstorming — hand off to spec-writing skill.
+Do not write the spec inside brainstorming -- hand off to spec-writing skill.
 
 ---
 
 ## Rules
 
-1. Never present more than 3 options — more creates paralysis.
-2. Always name each option distinctly — "Option A / B / C" is not enough.
+1. Never present more than 3 options -- more creates paralysis.
+2. Always name each option distinctly -- "Option A / B / C" is not enough.
 3. Push back at least once before accepting convergence.
 4. Brainstorming ends with a hand-off to spec-writing, not with an implementation plan.
