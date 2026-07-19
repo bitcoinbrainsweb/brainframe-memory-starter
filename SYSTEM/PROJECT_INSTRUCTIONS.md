@@ -1,4 +1,4 @@
-# Claude Project Instructions — Memory Starter
+# Claude Project Instructions -- Memory Starter
 
 Paste this entire file into your Claude Project's **Instructions** field. Replace `YOUR_GITHUB_USER/YOUR_REPO` below with your actual GitHub repo slug.
 
@@ -31,7 +31,7 @@ Full set in `SYSTEM/GLOBAL_RULES.md`, fetched at boot. The non-negotiable core:
 
 ---
 
-## SESSION START — IN ORDER
+## SESSION START -- IN ORDER
 
 1. Fetch `https://raw.githubusercontent.com/YOUR_GITHUB_USER/YOUR_REPO/main/SYSTEM/GLOBAL_RULES.md`
 2. Fetch `https://raw.githubusercontent.com/YOUR_GITHUB_USER/YOUR_REPO/main/SYSTEM/LOOKUP.md`
