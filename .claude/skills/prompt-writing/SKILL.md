@@ -27,7 +27,7 @@ Do NOT use for:
 
 ---
 
-## Step 1 — Self-execution check
+## Step 1 -- Self-execution check
 
 Before writing a prompt: can this task be resolved in-session right now?
 
@@ -37,7 +37,7 @@ If no (task requires: a running codebase, multi-file edits, terminal access, a s
 
 ---
 
-## Step 2 — Classify target tool
+## Step 2 -- Classify target tool
 
 | Tool | When |
 |------|------|
@@ -50,13 +50,13 @@ State the target tool at the top of the prompt.
 
 ---
 
-## Step 3 — Prompt structure
+## Step 3 -- Prompt structure
 
 Every prompt must include:
 
 **Target:** {tool name and model if relevant}
 
-**Run in:** {where to paste/run this — e.g. "Claude Code CLI in repo X", "Cursor chat", "ChatGPT with o3"}
+**Run in:** {where to paste/run this -- e.g. "Claude Code CLI in repo X", "Cursor chat", "ChatGPT with o3"}
 
 **Context:** What the codebase/project is. What has already been done. What must not change.
 
@@ -73,7 +73,7 @@ Every prompt must include:
 
 ---
 
-## Step 4 — Quality gates
+## Step 4 -- Quality gates
 
 Before delivering, check:
 
@@ -84,7 +84,7 @@ Before delivering, check:
 
 ---
 
-## Step 5 — Deliver
+## Step 5 -- Deliver
 
 For claude-code surface: write to `/tmp/{slug}-prompt.md` and present as a file.
 
@@ -96,7 +96,7 @@ Always state where to run it.
 
 ## Rules
 
-1. Never paste prompts inline in a long response — deliver as a file or copy block.
+1. Never paste prompts inline in a long response -- deliver as a file or copy block.
 2. Always state the run location explicitly.
 3. The best prompt is the shortest one that fully specifies the task.
-4. If you can do the task yourself in this session, do it — don't write a prompt for it.
+4. If you can do the task yourself in this session, do it -- don't write a prompt for it.
