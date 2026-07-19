@@ -14,7 +14,7 @@ tertiary_corpus:
   - "Lyn Alden long-form interviews (Bankless, Macro Voices, Thoughtful Money, Investors Podcast, 2021-2026) -- fiscal dominance applied, asset positioning, capital controls, AI and productivity offsets. Search: 'Lyn Alden Bankless fiscal dominance' / 'Lyn Alden Macro Voices'"
   - "Independent summaries and reviews of Broken Money (2023-2025) -- ledger theory, monetary history, the conditional Bitcoin recommendation. Search: 'Broken Money summary ledger theory'"
 version: 1.0.0
-last_reviewed: "2026-06-02 -- Bitcoin Infinity appendix (budget, structure, treasury logic)"
+last_reviewed: "2026-06-03"
 ---
 
 # Lyn Alden
@@ -73,19 +73,10 @@ Use Alden when:
 
 ## Example application
 
-**Subject:** Bitcoin Infinity appendix -- budget, investment structure, Bitcoin treasury (June 2026)
+This section is intentionally left as a template. After your first invocation of this advisor against one of your own plans, specs, or decks, record the run here: the input reviewed, the key findings the lens produced, and any conflicts between the advisor's worldview and your context. A recorded worked example makes future invocations sharper and shows new collaborators what this advisor is for.
 
-**Monetary-environment frame:** The budget is fixed in USD at 50,000 per month for 24 months. Under Alden's lens this is the appendix's quiet exposure: the plan assumes the dollar's purchasing power holds over two years in an environment she characterizes as fiscal dominance with persistent above-target inflation. A 24-month nominal runway loses real value over its life; the plan should either acknowledge this or, better, note that operating costs are partly hedged by the enterprise's own Bitcoin treasury and Bitcoin-denominated thinking. For a Bitcoin-native company this is not a weakness to hide but a thesis to state: the company lives the monetary argument it sells.
+Format: date, artifact reviewed, 3-6 numbered findings, open conflicts.
 
-**Ledger analysis:** This is where Alden adds the most. The appendix already places the Bitcoin treasury in the Estonian entity, held under multisig, appreciation retained not taxed on accrual. Alden would approve the instinct (hard, self-custodied ledger, retained scarcity) and press three system questions: who exactly controls the multisig keys and on what rails; how Bitcoin moves from the Estonian ledger to the Canadian operating entity when fiat is needed, and what that cross-ledger flow costs in tax and friction (the appendix's own structure notes a taxable event on transfer); and whether any operating runway should be held in Bitcoin versus fiat, given heuristic 1. The treasury logic is sound; the flow between ledgers is the part to harden.
-
-**Systems coherence check:** The two-entity structure (Alberta corp plus Estonian OÜ, unified by covenant, mirror economics, treasury in Estonia) is exactly the kind of structure Alden tests as a whole rather than piece by piece. Heuristic 7 fires: value flows between two jurisdictions with different monetary and tax regimes, and the mirror-economics distributions cross that border. She would want the cross-border flow traced end to end (where does revenue land, where does Bitcoin sit, how do distributions reach investors on each side, what withholding and currency exposure applies at each hop) and would mark the structure as a conditional bet whose coherence depends on the legal and tax review the appendix already defers to counsel. Her verdict would be NOTE, not DISCARD: the system is plausible and well-motivated, but its coherence is unproven until the flows are modeled, not just the entities described.
-
-**Heuristic findings:**
-- Budget -- H1 (nominal exposure): 24-month fiat runway carries unpriced debasement; turn it into a stated thesis given the company is Bitcoin-native.
-- Treasury -- H2 (ledger analysis): correct ledger choice (Bitcoin, self-custodied, Estonia); harden the key-control detail and the cross-ledger flow.
-- Structure -- H4, H7 (systems coherence, multi-jurisdiction): test the two-entity flows end to end; mark as a conditional bet pending counsel, not settled.
-- Treasury -- H6 (no straight-line appreciation): if any slide implies Bitcoin appreciation funds operations, tie it to liquidity drivers and state it conditionally.
 
 ## Corpus notes
 
