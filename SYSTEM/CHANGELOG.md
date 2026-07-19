@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.2.0 — 2026-06-15
+## v1.2.0 -- 2026-06-15
 
 Consolidation and rule-hardening pass. Backward compatible (older forks keep working via redirect stubs).
 
@@ -24,7 +24,7 @@ Consolidation and rule-hardening pass. Backward compatible (older forks keep wor
 ### Notes
 - The four-file files-only L3 model (facts / preferences / decisions / sessions) remains the default entry tier. Supabase stays optional.
 
-## v1.0.0 — 2026-04-17
+## v1.0.0 -- 2026-04-17
 
 Initial release. Tier 0 (files-only) feature-complete.
 
@@ -46,5 +46,5 @@ Initial release. Tier 0 (files-only) feature-complete.
 
 ### Known limitations
 - Private forks require uploading routing files to Claude Project Knowledge (web_fetch can't access private repos)
-- GitHub API rate limit applies at Tier 0 (no caching) — 5000 req/hr authenticated, plenty for normal use
-- No event log at Tier 0 — drift detection is manual / quarterly human review
+- GitHub API rate limit applies at Tier 0 (no caching) -- 5000 req/hr authenticated, plenty for normal use
+- No event log at Tier 0 -- drift detection is manual / quarterly human review
