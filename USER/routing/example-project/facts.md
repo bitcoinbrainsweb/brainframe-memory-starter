@@ -1,4 +1,4 @@
-# Facts — example-project
+# Facts -- example-project
 
 **Class:** IMMUTABLE
 **Writer:** ADR skill only
