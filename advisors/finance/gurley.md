@@ -16,7 +16,7 @@ tertiary_corpus:
   - "The Bill Gurley Chronicles (Macro-Ops, 2022) -- summary compilation of every Above the Crowd post. Search: 'Bill Gurley Chronicles Above the Crowd MBA'"
   - "Contemporary reactions to Gurley's burn-rate warnings (Fred Wilson AVC, Marc Andreessen burn-rate tweetstorm, 2015) -- the debate Gurley triggered. Search: 'Andreessen burn rate tweetstorm Gurley'"
 version: 1.0.0
-last_reviewed: "2026-06-02 -- Bitcoin Infinity appendix (budget, use of funds, milestones)"
+last_reviewed: "2026-06-03"
 ---
 
 # Bill Gurley
@@ -76,19 +76,10 @@ Use Gurley when:
 
 ## Example application
 
-**Subject:** Bitcoin Infinity appendix -- budget, use of funds, revenue milestones (June 2026)
+This section is intentionally left as a template. After your first invocation of this advisor against one of your own plans, specs, or decks, record the run here: the input reviewed, the key findings the lens produced, and any conflicts between the advisor's worldview and your context. A recorded worked example makes future invocations sharper and shows new collaborators what this advisor is for.
 
-**Burn and runway audit:** Monthly burn is 50,000 USD, runway 24 months, total raise 1.2M. Engineering at 14,000 is the largest single line, which is defensible for an AI-and-graph build where the founders also build. Founder base salaries are modest and below-market, which reads as the right instinct under heuristic 7. The lines tie to a coherent build. The open question Gurley would press: the budget assumes zero revenue for 24 months by design, so the entire plan is a single 24-month runway with no revenue cushion. That is a clean story but a fragile one if anything slips.
+Format: date, artifact reviewed, 3-6 numbered findings, open conflicts.
 
-**Financing-dependency test:** This is the weak point. The plan spends the full 1.2M over exactly 24 months and assumes no revenue across that window. There is no stated back-up path to profitability if the round comes up short or if month 24 arrives without a follow-on. Heuristic 2 fires hard: the plan's central risk is that it has no margin for the next round not appearing. The Month 6 revenue milestones partly answer this (revenue does start), which should be foregrounded as the de-risking event, not buried as a milestone.
-
-**Assumption discount pass:** The deck's framing as "commitments, not forecasts" is exactly the distinction heuristic 6 demands, and it earns credit. Three items still need discounting: "publishing revenue doubled" needs a stated base (double from what), the Rodeo 2027 profit goal is currently soft ("plan to make a profit") and a disciplined investor will ask for the number, and "podcast sponsorship live" needs a unit (how many slots, at what rate) to read as real. No TAM or LTV claim appears in the appendix, which is to its credit; the plan does not oversell market size.
-
-**Heuristic findings:**
-- Budget -- H1 (burn first): burn is clearly stated and tied to lines. Passes. Engineering concentration is a deliberate bet, not drift (H8). Passes.
-- Budget -- H2 (financing dependency): no back-up-to-profitability path stated. The plan is all-or-nothing on the 24-month runway. Flag.
-- Use of funds -- H3 (resist excess capital): raise is sized to the milestones, not maximized. Passes; reinforce this explicitly to investors.
-- Milestones -- H6 (commitment vs forecast): the commitments framing is correct and should be defended. The publishing "double" and Rodeo "profit" need a stated base and number to survive the discount pass.
 
 ## Corpus notes
 
