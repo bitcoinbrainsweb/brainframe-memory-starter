@@ -26,7 +26,7 @@ tertiary_corpus:
   - "David Ogilvy conference talks (1970s-80s) -- YouTube: David Ogilvy on Advertising Full Lecture"
   - "Ogilvy 1968 memo to Board: 'The better the advertising, the more profitable the office.' (The Unpublished David Ogilvy)"
 version: 2.0.0
-last_reviewed: "2026-05-20"
+last_reviewed: "2026-06-03"
 ---
 
 # David Ogilvy
@@ -94,29 +94,12 @@ When invoked, these steps MUST run before any output:
 - When designing a television or video commercial
 - When deciding how many concepts to present to a decision-maker
 
-## Example application (Brainframe context)
+## Example application
 
-Bitcoin Infinity investor deck review, session b7f341a8, 2026-05-20.
+This section is intentionally left as a template. After your first invocation of this advisor against one of your own plans, specs, or decks, record the run here: the input reviewed, the key findings the lens produced, and any conflicts between the advisor's worldview and your context. A recorded worked example makes future invocations sharper and shows new collaborators what this advisor is for.
 
-Ogilvy applied to the Bitcoin Infinity deck (10-slide investor deck, bitcoinbrainsweb/bitcoin-infinity-deck).
+Format: date, artifact reviewed, 3-6 numbered findings, open conflicts.
 
-Mandatory steps fired:
-1. Sell test: write a check -- but the deck never states this until slide 11.
-2. Positioning gate: NOT LOCKED. "The Bitcoin Library of Alexandria. All in one brain." is a metaphor, not a position. No stated promise, audience, or unique reason to believe.
-3. Big idea check (five-question test): gasp -- possibly; unique -- not tested; strategy-fit -- network-effects thesis buried in slide node labels, not in headline; 30-year durability -- metaphor survives, interactive format does not. Verdict: embryonic.
-4. Research check: volume data (420 books, 12,000 podcasts pre-2013) buried in interactive widget on slide 2. Investor skimming will miss it.
-5. Long-life test: core thesis (Bitcoin knowledge compounds; Brainframe is the compounding engine) is durable.
-
-Key verdicts:
-- Slide 1 headline sells atmosphere not benefit. Ogilvy: unselling headline wastes 80 percent of media spend.
-- Slide 2 ("The rabbit hole has no bottom") is closer to a real product truth than slide 1.
-- Slide 6 Coinbeast eyebrow ("Pillar 1 -- Discovery layer for what Bitcoiners actually buy") is the strongest copy line in the deck.
-- Slide 11 ask opens with mechanics before making the sale in human terms.
-
-Rewrites proposed:
-- Slide 1 alt: "Every Bitcoin book, podcast, and argument. Cross-referenced. Searchable. Growing daily."
-- Positioning sentence (missing from deck): "Brainframe is the only knowledge infrastructure built for the Bitcoin ecosystem -- owned by the people who wrote the books."
-- Slide 11 opener: "Bitcoin has more serious intellectual infrastructure than any asset class in history. None of it is connected. We are connecting it."
 
 ## Corpus notes
 
