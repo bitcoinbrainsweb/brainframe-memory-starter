@@ -23,12 +23,12 @@ Positive (start of message only):
 - `fork: {topic}`
 
 Negative:
-- Mid-sentence: "let's fork off later" — do NOT trigger
-- Requests to end the session — use handchat instead
+- Mid-sentence: "let's fork off later" -- do NOT trigger
+- Requests to end the session -- use handchat instead
 
 ---
 
-## Step 1 — Slugify topic
+## Step 1 -- Slugify topic
 
 Lowercase. Replace non-alphanumeric with single dash. Strip leading/trailing dashes. Drop stopwords (the, a, an, and, or, of, to, for, in, on, at, with, by). Truncate to 40 chars.
 
@@ -36,7 +36,7 @@ Example: "fork off the new pricing model" → `new-pricing-model`
 
 ---
 
-## Step 2 — Build context capture
+## Step 2 -- Build context capture
 
 ```
 [{YYYY-MM-DD}]
@@ -45,16 +45,16 @@ Last user turn: {trimmed to 400 chars}
 Last assistant turn: {trimmed to 400 chars}
 ```
 
-Total under 800 chars. If over, trim turns proportionally — never trim header or topic.
+Total under 800 chars. If over, trim turns proportionally -- never trim header or topic.
 
 ---
 
-## Step 3 — Append to forks file
+## Step 3 -- Append to forks file
 
 Write to `USER/routing/sessions.md` as a FORK entry:
 
 ```
-### {YYYY-MM-DD} — FORK: {slug}
+### {YYYY-MM-DD} -- FORK: {slug}
 **Topic:** {topic}
 **Context:**
 {context capture}
@@ -75,7 +75,7 @@ SHA=$(echo "$RESPONSE" | python3 -c "import sys,json; print(json.load(sys.stdin)
 
 UPDATED="${CURRENT}
 
-### {YYYY-MM-DD} — FORK: {slug}
+### {YYYY-MM-DD} -- FORK: {slug}
 **Topic:** {topic}
 **Context:**
 {context_capture}
@@ -96,17 +96,17 @@ Produce the FORK entry block for the user to paste into sessions.md. Do not atte
 
 ---
 
-## Step 4 — Respond
+## Step 4 -- Respond
 
 On success, exactly one line:
 ```
-forked: {slug} — resume with: pickup {slug}
+forked: {slug} -- resume with: pickup {slug}
 ```
 
 Then continue the current session as if nothing happened.
 
 On failure:
 ```
-fork failed — write error. Copy this manually:
+fork failed -- write error. Copy this manually:
 {full entry block}
 ```
