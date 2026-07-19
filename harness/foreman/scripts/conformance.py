@@ -117,7 +117,7 @@ def _maxwidth_value(line: str) -> str | None:
 def check_a1_max_width(files: list[ChangedFile]) -> list[Violation]:
     """A1: no fixed max-width on a page-level layout container. 70ch prose and
     90rem .bf-wide are permitted; a `max-width: 1100px` centered shell FAILs
-    (coinbeast-v1.1 Lane C cardinal violation)."""
+    (a real-world cardinal violation observed in production)."""
     out: list[Violation] = []
     for cf in files:
         for ln in cf.added_content_lines:
