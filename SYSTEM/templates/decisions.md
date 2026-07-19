@@ -1,4 +1,4 @@
-# Decisions — {project-name}
+# Decisions -- {project-name}
 
 **Class:** APPEND-ONLY
 **Writer:** `quitchat` skill
@@ -9,7 +9,7 @@ On overflow (>12,000 chars): oldest entries archive to `decisions-archive/{proje
 ## Entry format
 
 ```
-### YYYY-MM-DD — Short title
+### YYYY-MM-DD -- Short title
 **Status:** CONFIRMED / PROVISIONAL / SUPERSEDED (by: YYYY-MM-DD title)
 **Context:** Why this came up.
 **Decision:** What we decided.
@@ -20,7 +20,7 @@ On overflow (>12,000 chars): oldest entries archive to `decisions-archive/{proje
 
 <!-- Append new decisions below. Do not edit old entries. -->
 
-### 2026-01-01 — Example decision
+### 2026-01-01 -- Example decision
 **Status:** CONFIRMED
 **Context:** Showing what a decision entry looks like.
 **Decision:** Keep this format.
