@@ -2,10 +2,11 @@
 # Checks for forbidden internal references before distribution commits
 # Exits non-zero if any forbidden term is found in non-.git files
 
+# Note on placeholders: YOUR_GITHUB_USER, YOUR_REPO and friends are intended kit
+# content, not leaks. The starter ships them so a fork knows what to fill in, so they
+# are deliberately NOT listed below. If you fork this kit and want the check to catch
+# placeholders you forgot to replace, add them to your own copy of this list.
 FORBIDDEN=(
-    "YOUR_GITHUB_USER"
-    "YOUR_COMMS_REPO"
-    "YOUR_PUBLIC_REPO"
     "Project Owner"
     "Bitcoin Brains"
     "Doppler"
@@ -13,6 +14,7 @@ FORBIDDEN=(
     "coinbeast"
     "admin DAI"
     "dp.st.admin"
+    "Ulex"
 )
 
 FOUND=0

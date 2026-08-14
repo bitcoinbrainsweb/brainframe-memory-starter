@@ -10,6 +10,12 @@ description: >-
 
 Closes a working session in a fixed order and records what happened.
 
+This is the database counterpart to the vendored `.claude/skills/quitchat/SKILL.md`.
+That copy is file-first and self-contained: it closes a session with a `sessions.md`
+write alone and treats the velocity and close writes as optional. This copy assumes
+the sessions harness is installed and describes the database side. Same
+orchestration order in both.
+
 ## Orchestration order (hard requirement)
 
 ```

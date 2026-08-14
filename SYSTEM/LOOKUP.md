@@ -19,6 +19,15 @@ When the user mentions a project by name (matching an entry in `PROJECTS.md`), f
 - `decisions.md` -- APPEND-ONLY decision log
 - `sessions.md` -- ROLLING session summaries
 
+## On demand (T3)
+
+Never fetched at boot. Fetch when the request needs them, once per session.
+
+- `USER/topics/{slug}.md` -- topic notes and specs. This is what `recall: {topic}` searches when there is no queryable store.
+- `USER/voice/_floor.md` plus `USER/voice/authors/{name}.md` -- required before any "write as {name}" request. Fetch fresh; never work from a remembered floor.
+- `advisors/INDEX.md`, then `advisors/{category}/{slug}.md` -- required before any "ask {name}" request.
+- `harness/{system}/SETUP.md` -- only if that harness system is installed. The harness is optional; a fork with no database uses none of it.
+
 ## On project switch mid-chat
 
 The user may signal with:
@@ -44,7 +53,17 @@ On switch: fetch the new project's four routing files. Flag the previous project
 
 ## Writer rules
 
-Only the `quitchat` skill writes to `preferences.md`, `decisions.md`, and `sessions.md`. Only the ADR skill writes to `facts.md`. In-chat edits are not direct writes; they become queued confirmations for the next quitchat.
+Each routing file has a declared set of writers. Anything not listed here is written by hand.
+
+| File | Written by | Mode |
+|---|---|---|
+| `sessions.md` | `quitchat` (session entries), `handchat` (HANDCHAT entries), `fork-off` (FORK entries) | append; quitchat trims to the newest 5 session entries |
+| `decisions.md` | `adr` | append-only, never edits |
+| `preferences.md` | nothing automatic; `quitchat` surfaces proposed changes at close | MUTABLE, edited by hand once confirmed |
+| `facts.md` | nothing automatic | IMMUTABLE, edited by hand |
+| `USER/topics/{slug}.md` | `spec-writing` | one spec per file |
+
+In-chat edits are not direct writes; they become queued confirmations for the next quitchat.
 
 ## Bootstrap
 

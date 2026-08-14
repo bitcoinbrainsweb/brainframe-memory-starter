@@ -11,7 +11,7 @@ Run the check as code, not by eye. After drafting, grep the output against the p
 
 ## Absolute Bans
 
-- **Em-dashes (`--` or `---`, U+2014, U+2013 as em-dash):** Use comma, semicolon, colon, or period instead.
+- **Em-dashes (`--` or `---`, U+2014, U+2013 as em-dash):** Use comma, semicolon, colon, or period instead. This is the mechanical check for the ban declared in `SYSTEM/GLOBAL_RULES.md` > Formatting, not a second rule. It is stricter on purpose: repo docs may use `--` as the ASCII stand-in, human-facing prose may not, because the substitution is itself a tell. Restructure the sentence.
 - **Parallel-negation triplet ("No X. No Y. No Z."):** Collapse to a single clause. "No A, B, or C." is fine.
 - **Contrastive-frame inversion ("it's not X, it's Y" / "isn't X, it's Y" / "X is not Y. It is Z."):** State the affirmative directly, or carry the contrast across a wider span so the inversion is not back-to-back. This is the single most common AI tell; it is the highest-priority catch.
 - **Throat-clearing openers** ("I hope this finds you well", "In today's fast-paced world"): cut.

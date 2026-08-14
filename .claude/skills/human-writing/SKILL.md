@@ -93,7 +93,7 @@ If no: rewrite it. Common failures:
 
 ## Format rules
 
-- No em-dashes -- use commas, semicolons, or periods instead
+- No em-dashes. The rule lives in `SYSTEM/GLOBAL_RULES.md` > Formatting; `USER/voice/_floor.md` is the grep that enforces it. In prose, restructure the sentence rather than substituting a double hyphen.
 - No bullet lists in prose contexts (emails, posts, messages) unless structure genuinely helps
 - Short paragraphs: 2-3 sentences max in emails and posts
 - Subject lines (emails): specific and scannable, not clever

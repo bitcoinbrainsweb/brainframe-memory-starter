@@ -4,7 +4,7 @@ description: >-
   Writes production-quality prompts for Claude Code, Cursor, GPT, Perplexity, or
   any AI tool. Use when user says: write a prompt for, prompt this, give me a prompt,
   prompt for Claude Code, Cursor prompt. Delivers a clean file, not inline text.
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Prompt Writing
@@ -69,6 +69,8 @@ Every prompt must include:
 
 **First step:** The very first thing the agent should do (e.g. `git checkout main && git pull && git checkout -b branch-name`).
 
+**Dispatch limits:** Maximum depth, maximum fan-out, and whether respawn is permitted. Default: depth 1, fan-out 2, no poll-and-respawn. A prompt for an agentic tool that omits this section is incomplete. See `SYSTEM/GLOBAL_RULES.md` > Agent dispatch.
+
 **Done when:** Clear completion criteria. What does success look like?
 
 ---
@@ -80,13 +82,14 @@ Before delivering, check:
 - [ ] Task is specific enough that a competent agent could execute without asking clarifying questions
 - [ ] First step is explicit (branch creation, file read, etc.)
 - [ ] Constraints rule out the most likely failure modes
+- [ ] Dispatch limits are stated (depth, fan-out, respawn)
 - [ ] "Done when" is verifiable, not subjective
 
 ---
 
 ## Step 5 -- Deliver
 
-For claude-code surface: write to `/tmp/{slug}-prompt.md` and present as a file.
+For claude-code surface: write to `{scratch}/{slug}-prompt.md` and present as a file, where `{scratch}` is a working directory outside the repo (`$TMPDIR` on Unix, `%TEMP%` on Windows). Never a hardcoded `/tmp`, which does not exist on every fork's machine. Prompts are drafts, not repo artifacts; do not commit them.
 
 For claude-project surface: deliver as a fenced markdown block the user can copy.
 
