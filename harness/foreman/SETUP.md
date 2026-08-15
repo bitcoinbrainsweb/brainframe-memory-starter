@@ -108,6 +108,28 @@ harness/foreman/scripts/
   loops/loop_005_test_coverage.py      one worked example build loop
 ```
 
+## Dispatch rules
+
+These are orchestration rules, not universal memory rules; they live here rather than
+in `SYSTEM/GLOBAL_RULES.md`.
+
+- **The bundle is the unit of dispatch.** A single spec is a bundle of one, not a
+  special case. Dispatching a spec directly skips the topological sort, the
+  dependent-halt on failure, and the atomic commit. You give up all three and gain
+  nothing. Build the bundle, then run it.
+- **Every dispatch goes through the orchestrator.** No hand-rolled agent calls
+  alongside a run in flight. The orchestrator owns the queue, the branch, and the
+  write-ahead state machine. A side-channel dispatch writes to the same branch with
+  no queue row behind it, and from that point the run is no longer recoverable from
+  durable state.
+- **One issue, one attempt.** A spec gets one build attempt plus the single
+  verifier-informed retry, then it parks with its failure trail. Do not re-dispatch a
+  parked spec against unchanged inputs: a third attempt only resamples the same
+  distribution. Change the spec, or fix the defect the verifier named, then re-enqueue.
+- **Declare concurrency limits in every dispatch prompt.** Depth, fan-out, and whether
+  respawn is permitted. `SYSTEM/GLOBAL_RULES.md` > Agent dispatch holds the defaults;
+  this file does not restate them.
+
 ## Design rules to preserve
 
 - The build agent and the verify agent must be from different model families. A

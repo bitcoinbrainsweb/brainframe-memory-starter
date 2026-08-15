@@ -1,5 +1,16 @@
 # Maintenance Guide
 
+This file is the single home for maintenance cadence. `SYSTEM/GLOBAL_RULES.md` names the triggers and points here.
+
+## Event-driven checks (run these regardless of the calendar)
+
+Two events invalidate a passing check, and neither is on a schedule:
+
+1. **A major model release.** Re-run the full harness audit: the quickstart demos (`harness/quickstart/demo_*.py`), the foreman gates, and a read-through of every `SKILL.md` for instructions that assumed the old model's behaviour. A prompt tuned to one model generation is not evidence about the next one.
+2. **A novel failure that recurs.** The first occurrence is noise. The second is a pattern: stop, re-run the harness audit, and either fix the cause or write the failure mode into the relevant skill's Failure modes table so the next session degrades cleanly instead of rediscovering it.
+
+Record what the audit found. An audit that produced no written output did not happen.
+
 ## Monthly checks
 
 1. **Credential validity**: Run `source ~/.config/memory-starter/.env && curl -s "$SUPABASE_URL/rest/v1/topics?limit=1" -H "apikey: $SUPABASE_ANON_KEY" | head -1`. If you get a 401 or empty response, your Supabase anon key may have been rotated. Get the new key from Supabase dashboard > API Settings.

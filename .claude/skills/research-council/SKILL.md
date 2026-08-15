@@ -4,7 +4,8 @@ description: >-
   Runs multi-model critique on specs, plans, or decisions. Use when user says:
   research council, run the council, council this, critique this spec, get me a
   second opinion on this. Produces structured critique with verdict and unresolved risks.
-version: 1.0.0
+  Spends metered model calls: estimate first, report actuals after.
+version: 1.1.0
 ---
 
 # Research Council
@@ -51,6 +52,24 @@ After both paths: merge findings, deduplicate, surface the delta (what the seque
 
 ---
 
+## Cost and dispatch limits
+
+The council spends real money on every run: one paid call per critic per path. Before
+the first call, state the estimate and wait for approval.
+
+```
+Council on {artifact}: {n} critic calls across {m} paths, ~{tokens} in / ~{tokens} out
+per call. Proceed?
+```
+
+Report actuals after synthesis, in the same unit. See `SYSTEM/GLOBAL_RULES.md` > Cost.
+
+Dispatch limits for this skill: depth 1, fan-out 3 (the parallel path), no respawn. A
+critic that times out is a missing seat, and a missing seat is recorded as an
+abstention; do not re-dispatch it. See `SYSTEM/GLOBAL_RULES.md` > Agent dispatch.
+
+---
+
 ## Running the council (claude-code surface)
 
 The council requires API keys for at least two different models. Load from env:
@@ -63,10 +82,13 @@ source ~/.config/memory-starter/.env
 
 **Minimum viable council (1 key -- Anthropic only):**
 
-Run 3 separate prompts against claude-sonnet with varied critic personas:
+Run 3 separate prompts against one model with varied critic personas. Set
+`COUNCIL_MODEL` to a current model id from your provider's model list; do not copy a
+model string out of a doc, because pinned model ids go stale between releases.
 
 ```bash
 SPEC_CONTENT=$(cat /path/to/spec.md)
+COUNCIL_MODEL="${COUNCIL_MODEL:?set this to a current model id}"
 
 for PERSONA in "skeptical engineer" "product manager who has seen this fail before" "security reviewer"; do
   curl -s "https://api.anthropic.com/v1/messages" \
@@ -74,7 +96,7 @@ for PERSONA in "skeptical engineer" "product manager who has seen this fail befo
     -H "anthropic-version: 2023-06-01" \
     -H "Content-Type: application/json" \
     -d "{
-      \"model\": \"claude-sonnet-4-20250514\",
+      \"model\": \"${COUNCIL_MODEL}\",
       \"max_tokens\": 1000,
       \"messages\": [{
         \"role\": \"user\",

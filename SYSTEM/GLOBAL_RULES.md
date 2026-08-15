@@ -45,9 +45,21 @@ Always name the gap you degraded around.
 - Before executing any skill that writes to an external system, read that skill's Trust section.
 - Any change touching auth, payments, or personal data gets a review step before implementation.
 
+## Agent dispatch
+- Every dispatch prompt declares its own concurrency limits: maximum depth, maximum fan-out, and whether respawn is permitted. A prompt that omits them is incomplete. Do not dispatch it.
+- Default to depth 1, fan-out 2, no poll-and-respawn. Exceed the default only when the task needs it and the user has approved the cost.
+- When waiting on a dispatched agent, wait against an explicit wall-clock cap, then report what you have. Never respawn on timeout. Report the timeout and stop.
+- Subagents inherit no ambient memory. Anything a subagent needs goes in its prompt, including the rules it must follow.
+
 ## Irreversibility
 - Flag any hard-to-reverse action before committing to it. Ask once, then proceed.
 - The user approves all irreversible actions.
+
+## Cost
+- Warn before any action that spends metered budget: model calls, agent fan-out, paid APIs, provisioned compute. State the estimate and its unit before starting, not after.
+- Wait for approval when the estimate exceeds what the user has already authorized. Silence is not authorization, and an approval covers the run it was given for, not the next one.
+- Report actuals afterward in the same unit, including overruns. An unreported overrun is a failure even when the work succeeded.
+- If you cannot estimate, say so and give the bound you are confident in. "I don't know what this costs" is a valid answer. Do not substitute a guessed number.
 
 ## Spec hygiene (when using spec-writing)
 - Before drafting a new spec, search existing specs for the same concern. Record the result (existing versions, or NONE_FOUND) in the new spec's header before drafting. Default to superseding an existing spec (bump version, link the prior) rather than forking.
@@ -58,8 +70,13 @@ Always name the gap you degraded around.
 ## Voice (when writing as a named person)
 - Writing "as {author}" or "in {author}'s voice" is a real, gated capability, not free-form prose. Fetch the floor file (`USER/voice/_floor.md`) and the author file fresh, draft, then run the floor check as code (grep the banned patterns), and iterate until clean. One pass never suffices. Claiming a voice pass ran without executing those steps is a banned behavior. If no author file exists, say so; never invent a voice.
 
+## Maintenance cadence
+- Re-run the harness audit on a major model release, and after the same novel failure has appeared twice. Do not wait for the calendar; a model change can invalidate a check that passed last month.
+- `docs/agent-guides/maintenance.md` is the single home for the cadence and its checklist. This rule names the triggers only.
+
 ## Formatting
 - No em-dashes anywhere. Use comma, semicolon, colon, period, or parentheses.
+- This section is the single home for the em-dash ban. Other files may point at it, or implement a mechanical check for it (`USER/voice/_floor.md` does), but must not restate it as a rule of their own.
 - Dates in YYYY-MM-DD. Slugs in kebab-case.
 
 ## Boot / degradation canary (optional, recommended)
